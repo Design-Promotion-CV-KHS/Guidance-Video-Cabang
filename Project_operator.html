@@ -44,7 +44,6 @@
             padding-bottom: 50px;
         }
 
-        /* Nav Bar */
         nav {
             display: flex;
             justify-content: space-between;
@@ -93,7 +92,6 @@
             padding: 3rem 5%;
         }
 
-        /* Workflow Section */
         .workflow-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
@@ -107,6 +105,14 @@
             border-radius: 24px;
             padding: 2rem;
             animation: fadeInUp 0.6s ease-out forwards;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .workflow-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
         }
 
         .step-header {
@@ -128,6 +134,14 @@
             justify-content: center;
             border-radius: 50%;
             font-weight: 800;
+            transition: all 0.5s ease;
+        }
+
+        .workflow-card:hover .step-number {
+            box-shadow:
+                0 0 10px rgba(255, 255, 255, 0.8),
+                0 0 20px var(--mineral-green);
+            transform: scale(1.1);
         }
 
         .workflow-card h2 {
@@ -180,7 +194,6 @@
             border: 1px dashed var(--primary-blue);
         }
 
-        /* Tools AI Section */
         .section-title {
             margin-bottom: 2.5rem;
             font-size: 1.8rem;
@@ -269,7 +282,7 @@
         <a href="index.html" class="logo">QUICK<span>VIDEO</span></a>
         <ul>
             <li><a href="index.html">Home</a></li>
-            <li><a href="Guidance_Video.html">Guidance Cabang</a></li>
+            <li><a href="Guidance_video.html">Guidance Cabang</a></li>
             <li><a href="Project_operator.html" class="active">Project Operator</a></li>
         </ul>
         <div
