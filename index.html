@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Performa Cabang</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #0059FF;
+            --mineral-green: #41B3A3;
+            --slate-dark: #0f172a;
+            --glass-white: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --target-red: #ff4d4d;
+        }
+
+        /* --- Animasi --- */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes growUp {
+            from {
+                transform: scaleY(0);
+            }
+
+            to {
+                transform: scaleY(1);
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background: radial-gradient(circle at top right, #1e293b, #0f172a);
+            color: var(--text-main);
+            min-height: 100vh;
+        }
+
+        /* --- Navbar (Tetap Ada) --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 8%;
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--glass-border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--mineral-green);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 5%;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        /* --- Stats (Tetap Ada) --- */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .stat-card {
+            background: var(--glass-white);
+            border: 1px solid var(--glass-border);
+            padding: 1.5rem;
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        .stat-card .number {
+            font-size: 2.5rem;
+            font-weight: 800;
+        }
+
+        /* --- Grafik Grid --- */
+        .double-chart-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .chart-box {
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid var(--glass-border);
+            padding: 2.5rem 1.5rem;
+            border-radius: 24px;
+            position: relative;
+        }
+
+        .bar-chart-area {
+            height: 220px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            position: relative;
+            border-bottom: 2px solid var(--glass-border);
+            padding: 0 10px;
+        }
+
+        /* --- PENYEMPURNAAN GARIS TARGET --- */
+        /* Kita pakai height pixel agar presisi nempel di angka */
+        .line-target {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            border-top: 2px solid var(--target-red);
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .tag-target {
+            position: absolute;
+            right: 0;
+            top: -22px;
+            color: var(--target-red);
+            font-size: 0.7rem;
+            font-weight: 800;
+            background: #0f172a;
+            padding: 2px 5px;
+        }
+
+        .bar-group {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 5;
+        }
+
+        .val-num {
+            font-size: 0.8rem;
+            font-weight: 800;
+            margin-bottom: 6px;
+        }
+
+        /* Batang Grafik */
+        .bar-pill {
+            width: 60%;
+            border-radius: 4px 4px 0 0;
+            transform-origin: bottom;
+            animation: growUp 1s ease-out forwards;
+        }
+
+        .bar-pill.reached {
+            background: var(--mineral-green);
+            box-shadow: 0 0 15px rgba(65, 179, 163, 0.3);
+        }
+
+        .bar-pill.not-reached {
+            background: var(--primary-blue);
+        }
+
+        .branch-label {
+            font-size: 0.6rem;
+            color: var(--text-muted);
+            margin-top: 12px;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        @media (max-width: 1024px) {
+            .double-chart-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <a href="#" class="logo">QUICK<span>VIDEO</span></a>
+        <ul>
+            <li><a href="index.html" style="color: var(--mineral-green);">Home</a></li>
+            <li><a href="Guidance_Video.html">Guidance Cabang</a></li>
+            <li><a href="Project_operator.html">Project Operator</a></li>
+        </ul>
+        <div
+            style="font-size: 0.8rem; border: 1px solid var(--mineral-green); padding: 5px 15px; border-radius: 20px; color: var(--mineral-green);">
+            Maret 2026</div>
+    </nav>
+
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>Total 2026</h3>
+                <div class="number">54</div>
+            </div>
+            <div class="stat-card">
+                <h3>Ready Edit</h3>
+                <div class="number" style="color: var(--mineral-green);">22</div>
+            </div>
+            <div class="stat-card">
+                <h3>Editor</h3>
+                <div class="number">4</div>
+            </div>
+        </div>
+
+        <div class="double-chart-grid">
+
+            <div class="chart-box">
+                <h3 style="margin-bottom: 5px;">Kumulatif Video Kiriman</h3>
+                <p style="color: var(--text-muted); font-size: 0.8rem; margin-bottom: 40px;">Januari - Maret (Target: 6
+                    Video)</p>
+                <div class="bar-chart-area">
+                    <div class="line-target" style="bottom: 82px;">
+                        <span class="tag-target"> 6 </span>
+                    </div>
+
+                    <div class="bar-group"><span class="val-num">6</span>
+                        <div class="bar-pill reached" style="height: 60px;"></div><span
+                            class="branch-label">JOGJA</span>
+                    </div>
+                    <div class="bar-group"><span class="val-num">20</span>
+                        <div class="bar-pill reached" style="height: 200px;"></div><span
+                            class="branch-label">NGANJUK</span>
+                    </div>
+                    <div class="bar-group"><span class="val-num">5</span>
+                        <div class="bar-pill not-reached" style="height: 50px;"></div><span
+                            class="branch-label">MKSR</span>
+                    </div>
+                    <div class="bar-group"><span class="val-num">6</span>
+                        <div class="bar-pill reached" style="height: 60px;"></div><span
+                            class="branch-label">MEDAN</span>
+                    </div>
+                    <div class="bar-group"><span class="val-num">3</span>
+                        <div class="bar-pill not-reached" style="height: 30px;"></div><span
+                            class="branch-label">PKBARU</span>
+                    </div>
+                    <div class="bar-group"><span class="val-num">4</span>
+                        <div class="bar-pill not-reached" style="height: 40px;"></div><span
+                            class="branch-label">LMPG</span>
+                    </div>
+                    <div class="bar-group"><span class="val-num">5</span>
+                        <div class="bar-pill not-reached" style="height: 50px;"></div><span
+                            class="branch-label">BJM</span>
+                    </div>
+                    <div class="bar-group"><span class="val-num">3</span>
+                        <div class="bar-pill not-reached" style="height: 30px;"></div><span
+                            class="branch-label">PALU</span>
+                    </div>
+                    <div class="bar-group"><span class="val-num">6</span>
+                        <div class="bar-pill reached" style="height: 60px;"></div><span
+                            class="branch-label">CIANJUR</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chart-box">
+                <h3 style="margin-bottom: 5px;">Kiriman Resource Maret</h3>
+                <p style="color: var(--text-muted); font-size: 0.8rem; margin-bottom: 40px;">Bulan Berjalan (Target: 2
+                    Video)</p>
+                <div class="bar-chart-area">
+                    <div class="line-target" style="bottom: 82px;">
+                        <span class="tag-target">2</span>
+                    </div>
+
+                    <div class="bar-group"><span class="val-num">2</span>
+                        <div class="bar-pill reached" style="height: 60px;"></div><span
+                            class="branch-label">JOGJA</span>
+                    </div>
+                    <div class="bar-group"><span class="val-num">6</span>
+                        <div class="bar-pill reached" style="height: 180px;"></div><span
+                            class="branch-label">NGANJUK</span>
+                    </div>
+                    <div class="bar-group"><span class="val-num">3</span>
+                        <div class="bar-pill reached" style="height: 90px;"></div><span class="branch-label">MKSR</span>
+                    </div>
+                    <div class="bar-group"><span class="val-num">1</span>
+                        <div class="bar-pill not-reached" style="height: 30px;"></div><span
+                            class="branch-label">MEDAN</span>
+                    </div>
+                    <div class="bar-group"><span class="val-num">2</span>
+                        <div class="bar-pill reached" style="height: 60px;"></div><span
+                            class="branch-label">PKBARU</span>
+                    </div>
+                    <div class="bar-group"><span class="val-num">0</span>
+                        <div class="bar-pill not-reached" style="height: 5px;"></div><span
+                            class="branch-label">LMPG</span>
+                    </div>
+                    <div class="bar-group"><span class="val-num">0</span>
+                        <div class="bar-pill not-reached" style="height: 5px;"></div><span
+                            class="branch-label">BJM</span>
+                    </div>
+                    <div class="bar-group"><span class="val-num">0</span>
+                        <div class="bar-pill not-reached" style="height: 5px;"></div><span
+                            class="branch-label">PALU</span>
+                    </div>
+                    <div class="bar-group"><span class="val-num">2</span>
+                        <div class="bar-pill reached" style="height: 60px;"></div><span
+                            class="branch-label">CIANJUR</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+</html>

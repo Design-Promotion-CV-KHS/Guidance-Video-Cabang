@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick Guidance Video | Project Operator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #0059FF;
+            --mineral-green: #41B3A3;
+            --slate-dark: #0f172a;
+            --glass-white: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background: radial-gradient(circle at top right, #1e293b, #0f172a);
+            color: var(--text-main);
+            min-height: 100vh;
+            padding-bottom: 50px;
+        }
+
+        /* Nav Bar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 8%;
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--glass-border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--mineral-green);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover,
+        nav ul li a.active {
+            color: var(--mineral-green);
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 3rem 5%;
+        }
+
+        /* Workflow Section */
+        .workflow-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 20px;
+            margin-bottom: 5rem;
+        }
+
+        .workflow-card {
+            background: var(--glass-white);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 2rem;
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 1rem;
+        }
+
+        .step-number {
+            background: white;
+            color: var(--slate-dark);
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-weight: 800;
+        }
+
+        .workflow-card h2 {
+            font-size: 0.9rem;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .workflow-list {
+            list-style: none;
+        }
+
+        .workflow-list li {
+            font-size: 0.85rem;
+            color: #d1d5db;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .workflow-list li::before {
+            content: attr(data-num) ".";
+            position: absolute;
+            left: 0;
+            color: var(--mineral-green);
+            font-weight: 700;
+        }
+
+        .workflow-list a {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .workflow-list a:hover {
+            text-decoration: underline;
+        }
+
+        .ip-box {
+            background: rgba(0, 89, 255, 0.1);
+            padding: 10px;
+            border-radius: 8px;
+            font-family: monospace;
+            color: var(--primary-blue);
+            margin: 8px 0;
+            display: block;
+            font-size: 0.8rem;
+            border: 1px dashed var(--primary-blue);
+        }
+
+        /* Tools AI Section */
+        .section-title {
+            margin-bottom: 2.5rem;
+            font-size: 1.8rem;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-title::after {
+            content: "";
+            height: 1px;
+            flex-grow: 1;
+            background: var(--glass-border);
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .tools-grid a {
+            text-decoration: none;
+            display: flex;
+        }
+
+        .tool-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .tool-card:hover {
+            background: rgba(65, 179, 163, 0.1);
+            border-color: var(--mineral-green);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .tool-icon {
+            font-size: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            width: 55px;
+            height: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 15px;
+            flex-shrink: 0;
+        }
+
+        .tool-info h3 {
+            color: var(--mineral-green);
+            font-size: 1.1rem;
+            margin-bottom: 6px;
+        }
+
+        .tool-info p {
+            color: var(--text-muted);
+            font-size: 0.82rem;
+            line-height: 1.4;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+
+            .workflow-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <a href="index.html" class="logo">QUICK<span>VIDEO</span></a>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="Guidance_video.html">Guidance Cabang</a></li>
+            <li><a href="Project_operator.html" class="active">Project Operator</a></li>
+        </ul>
+        <div
+            style="font-size: 0.8rem; border: 1px solid var(--mineral-green); padding: 5px 15px; border-radius: 20px; color: var(--mineral-green);">
+            Maret 2026</div>
+    </nav>
+
+    <div class="container">
+        <div class="workflow-grid">
+            <div class="workflow-card">
+                <div class="step-header">
+                    <div class="step-number">1</div>
+                    <h2>PRE - EDITING</h2>
+                </div>
+                <ul class="workflow-list">
+                    <li data-num="1">Plotting video sesuai resource yang ada. <a
+                            href="https://docs.google.com/spreadsheets/d/1kErF726o20wDJSOvHVxuJ34EjIVd7jDjVT9q61KHx70/edit?usp=sharing"
+                            target="_blank">Klik Disini.</a></li>
+                    <li data-num="2">Video Editor Mengambil Resource Yang Diplotkan Di Server 2.</li>
+                    <li data-num="3">Melakukan Transkripsi Dari Video Untuk Mendapatkan Transkrip Dialog. Selanjutnya
+                        Mengkurasi Poin Poin Penting Yang Ada Pada Transkrip. <a
+                            href="https://gemini.google.com/share/80ce9e695415" target="_blank">Gunakan Tools Ini Untuk
+                            Transkripsi dan kurasi isi transkrip.</a></li>
+                    <li data-num="4">Review Hasil Kurasi Ke Kepala Seksi Madya.</li>
+                </ul>
+            </div>
+
+            <div class="workflow-card">
+                <div class="step-header">
+                    <div class="step-number">2</div>
+                    <h2>EDITING TAHAP AWAL (ROUGH CUT)</h2>
+                </div>
+                <ul class="workflow-list">
+                    <li data-num="5">Sesuaikan Poin - Poin Dengan Audio Wawancara.</li>
+                    <li data-num="6">Gunakan Backsound Yang Sesuai Dengan Video. <a href="https://pixabay.com/music/"
+                            target="_blank">Klik Disini Untuk Mencari Lagu Bebas Royalty.</a></li>
+                    <li data-num="7">Susun Video Menjadi Satu Kesatuan, Kombinasikan Video Wawancara Dengan Video Olah
+                        Lahan Dan Hasil Olah Lahan.</li>
+                    <li data-num="8">Review Kepala Seksi Madya.</li>
+                    <li data-num="9">Review Kepala Seksi.</li>
+                    <li data-num="10">Review Direktur Utama.</li>
+                </ul>
+            </div>
+
+            <div class="workflow-card">
+                <div class="step-header">
+                    <div class="step-number">3</div>
+                    <h2>EDITING TAHAP AKHIR (FINISHING)</h2>
+                </div>
+                <ul class="workflow-list">
+                    <li data-num="11">Revisi Editing Sesuai Arahan Kepala Seksi, Penambahan Elemen - Elemen Yang Membuat
+                        Video Menjadi Lebih Hidup, & Penambahan Pop Up Spektra dan Pop Up Tokoquick.</li>
+                    <li data-num="12">Pembuatan Thumbnail Video.<br>
+                        <a href="https://gemini.google.com/share/577efcc3902b" target="_blank">Gunakan Tools Ini Untuk
+                            Mencari Ide Headline Thumbnail.</a><br>
+                        <a href="https://gemini.google.com/share/51c90287c0ce" target="_blank">Gunakan Tools Ini Untuk
+                            Mempercantik Thumbnail.</a>
+                    </li>
+                    <li data-num="13">Review Kepala Seksi Madya.</li>
+                    <li data-num="14">Review Kepala Seksi.</li>
+                    <li data-num="15">Review Direktur Utama.</li>
+                </ul>
+            </div>
+
+            <div class="workflow-card">
+                <div class="step-header">
+                    <div class="step-number">4</div>
+                    <h2>PRE - PUBLISH</h2>
+                </div>
+                <ul class="workflow-list">
+                    <li data-num="16">Masukkan Video Yang Sudah Siap Diupload Youtube Kedalam Server 1.<br>
+                        <span class="ip-box">\\192.168.3.9\mkt\[ UPLOAD VIDEO YOUTUBE ]</span>
+                        Masukkan Dalam Folder Yang Sesuai Dengan Produk Dalam Video Yang Dibuat.
+                    </li>
+                    <li data-num="17">Buat Approval Sheet Untuk Video Yang Sudah Jadi. <a
+                            href="https://www.figma.com/design/88YiR0BAyfXTUiLFMFY3ht/Template-Approval-Sheet--2-lembar-?node-id=0-1&t=ydYF6tNGkVmZn0QW-1"
+                            target="_blank">Template Approval Sheet</a></li>
+                </ul>
+            </div>
+
+            <div class="workflow-card">
+                <div class="step-header">
+                    <div class="step-number">5</div>
+                    <h2>PUBLISHING</h2>
+                </div>
+                <ul class="workflow-list">
+                    <li data-num="18">Informasikan Pada Sie Digital Marketing Bahwa Video Yang Dikerjakan Sudah Siap
+                        Untuk Diupload Pada Youtube.</li>
+                    <li data-num="19">Kirimkan Transkrip Pada Sie Digital Marketing Untuk Keperluan Pembuatan Judul
+                        Video Serta Deskripsi Video.</li>
+                </ul>
+            </div>
+
+            <div class="workflow-card">
+                <div class="step-header">
+                    <div class="step-number">6</div>
+                    <h2>POST - PUBLISH</h2>
+                </div>
+                <ul class="workflow-list">
+                    <li data-num="20">Update Progress Editing Pada Tabel Spreadsheet. <a
+                            href="https://docs.google.com/spreadsheets/d/1US1m2XOT5Eu04DWAMhJ-pEfLhNYIIMTJElcGprqn4LY/edit?gid=1935407345#gid=1935407345"
+                            target="_blank">Spreadsheet Progress Editing</a></li>
+                    <li data-num="21">Ulangi Proses Dari Nomor 1 Lagi Jika Video Sudah Di Publish.</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2 class="section-title">TOOLS AI PRODUCTION</h2>
+        <div class="tools-grid">
+            <a href="https://gemini.google.com/share/577efcc3902b" target="_blank">
+                <div class="tool-card">
+                    <div class="tool-icon">📰</div>
+                    <div class="tool-info">
+                        <h3>Headline Thumbnail</h3>
+                        <p>Generate ide judul thumbnail yang menarik berdasarkan transkrip wawancara.</p>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://gemini.google.com/share/51c90287c0ce" target="_blank">
+                <div class="tool-card">
+                    <div class="tool-icon">📸</div>
+                    <div class="tool-info">
+                        <h3>Advance Thumbnail</h3>
+                        <p>Optimasi visual dan grading warna thumbnail agar lebih eye-catching.</p>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://gemini.google.com/share/55131cc237a2" target="_blank">
+                <div class="tool-card">
+                    <div class="tool-icon">🎙️</div>
+                    <div class="tool-info">
+                        <h3>Audio Generator</h3>
+                        <p>Mengubah teks menjadi suara (VO) berkualitas tinggi menggunakan Gemini AI.</p>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://docs.google.com/document/d/1tjoO_zQxw3nN4oXH-dUPmbjUNp-EpwCn98BDdAN6R0Q/edit?usp=sharing"
+                target="_blank">
+                <div class="tool-card">
+                    <div class="tool-icon">💡</div>
+                    <div class="tool-info">
+                        <h3>Prompt Thumbnail</h3>
+                        <p>Kumpulan library prompt khusus untuk pengolahan visual di Advance Tools.</p>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://gemini.google.com/share/80ce9e695415" target="_blank">
+                <div class="tool-card">
+                    <div class="tool-icon">✍️</div>
+                    <div class="tool-info">
+                        <h3>Generate Transcript</h3>
+                        <p>Mempercepat konversi audio rekaman lahan menjadi teks transkrip siap pakai.</p>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://podcast.adobe.com/en" target="_blank">
+                <div class="tool-card">
+                    <div class="tool-icon">🪄</div>
+                    <div class="tool-info">
+                        <h3>Audio Enhancer</h3>
+                        <p>Menghilangkan noise angin atau suara mesin agar vokal terdengar jernih.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+</body>
+
+</html>
