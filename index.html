@@ -4,9 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Performa Cabang</title>
+    <title>Dashboard Performa Cabang | Glow Edition</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary-blue: #0059FF;
@@ -42,6 +43,16 @@
             }
         }
 
+        @keyframes spinSlow {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -55,7 +66,7 @@
             min-height: 100vh;
         }
 
-        /* --- Navbar (Tetap Ada) --- */
+        /* --- Navbar --- */
         nav {
             display: flex;
             justify-content: space-between;
@@ -90,6 +101,11 @@
             text-decoration: none;
             color: var(--text-muted);
             font-size: 0.85rem;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--mineral-green);
         }
 
         .container {
@@ -99,7 +115,7 @@
             animation: fadeInUp 0.8s ease-out;
         }
 
-        /* --- Stats (Tetap Ada) --- */
+        /* --- Stats Card with Glow Hover --- */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -113,6 +129,25 @@
             padding: 1.5rem;
             border-radius: 20px;
             text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--mineral-green);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 15px rgba(65, 179, 163, 0.2);
+        }
+
+        .stat-card i {
+            position: absolute;
+            right: -10px;
+            top: -10px;
+            font-size: 4rem;
+            color: rgba(255, 255, 255, 0.02);
+            animation: spinSlow 15s linear infinite;
         }
 
         .stat-card .number {
@@ -133,6 +168,12 @@
             padding: 2.5rem 1.5rem;
             border-radius: 24px;
             position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .chart-box:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(15, 23, 42, 0.7);
         }
 
         .bar-chart-area {
@@ -145,15 +186,15 @@
             padding: 0 10px;
         }
 
-        /* --- PENYEMPURNAAN GARIS TARGET --- */
-        /* Kita pakai height pixel agar presisi nempel di angka */
+        /* --- Garis Target --- */
         .line-target {
             position: absolute;
             left: 0;
             width: 100%;
-            border-top: 2px solid var(--target-red);
+            border-top: 2px dashed var(--target-red);
             z-index: 10;
             pointer-events: none;
+            opacity: 0.6;
         }
 
         .tag-target {
@@ -173,29 +214,52 @@
             flex-direction: column;
             align-items: center;
             z-index: 5;
+            transition: all 0.3s ease;
+        }
+
+        .bar-group:hover {
+            transform: scale(1.05);
+            z-index: 20;
         }
 
         .val-num {
             font-size: 0.8rem;
             font-weight: 800;
             margin-bottom: 6px;
+            transition: 0.3s;
         }
 
-        /* Batang Grafik */
+        .bar-group:hover .val-num {
+            color: #fff;
+            transform: translateY(-3px);
+        }
+
+        /* Batang Grafik Animasi */
         .bar-pill {
             width: 60%;
-            border-radius: 4px 4px 0 0;
+            border-radius: 6px 6px 0 0;
             transform-origin: bottom;
-            animation: growUp 1s ease-out forwards;
+            animation: growUp 1.2s cubic-bezier(0.17, 0.67, 0.83, 0.67) forwards;
+            transition: all 0.3s ease;
         }
 
         .bar-pill.reached {
-            background: var(--mineral-green);
-            box-shadow: 0 0 15px rgba(65, 179, 163, 0.3);
+            background: linear-gradient(to top, var(--mineral-green), #64ffd1);
+            box-shadow: 0 0 10px rgba(65, 179, 163, 0.2);
         }
 
         .bar-pill.not-reached {
-            background: var(--primary-blue);
+            background: linear-gradient(to top, var(--primary-blue), #5e92ff);
+        }
+
+        .bar-group:hover .bar-pill.reached {
+            box-shadow: 0 0 25px rgba(65, 179, 163, 0.6);
+            filter: brightness(1.2);
+        }
+
+        .bar-group:hover .bar-pill.not-reached {
+            box-shadow: 0 0 25px rgba(0, 89, 255, 0.5);
+            filter: brightness(1.2);
         }
 
         .branch-label {
@@ -204,6 +268,11 @@
             margin-top: 12px;
             text-transform: uppercase;
             font-weight: 700;
+            transition: 0.3s;
+        }
+
+        .bar-group:hover .branch-label {
+            color: #fff;
         }
 
         @media (max-width: 1024px) {
@@ -231,14 +300,17 @@
     <div class="container">
         <div class="stats-grid">
             <div class="stat-card">
+                <i class="fas fa-video"></i>
                 <h3>Total 2026</h3>
                 <div class="number">59</div>
             </div>
             <div class="stat-card">
+                <i class="fas fa-clapperboard"></i>
                 <h3>Ready Edit</h3>
                 <div class="number" style="color: var(--mineral-green);">16</div>
             </div>
             <div class="stat-card">
+                <i class="fas fa-users-gear"></i>
                 <h3>Editor</h3>
                 <div class="number">4</div>
             </div>
@@ -252,7 +324,7 @@
                     Video)</p>
                 <div class="bar-chart-area">
                     <div class="line-target" style="bottom: 82px;">
-                        <span class="tag-target"> 6 </span>
+                        <span class="tag-target"> <i class="fas fa-bullseye"></i> 6 </span>
                     </div>
 
                     <div class="bar-group"><span class="val-num">6</span>
@@ -300,7 +372,7 @@
                     Video)</p>
                 <div class="bar-chart-area">
                     <div class="line-target" style="bottom: 82px;">
-                        <span class="tag-target">2</span>
+                        <span class="tag-target"><i class="fas fa-bullseye"></i> 2</span>
                     </div>
 
                     <div class="bar-group"><span class="val-num">2</span>
