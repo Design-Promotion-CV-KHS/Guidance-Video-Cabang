@@ -8,6 +8,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <base target="_blank">
+
     <style>
         :root {
             --primary-blue: #0059FF;
@@ -19,7 +22,7 @@
             --text-muted: #94a3b8;
         }
 
-        /* --- Animasi Dasar (Asli) --- */
+        /* --- Animasi Dasar --- */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -57,7 +60,6 @@
             animation: fadeIn 0.8s ease-in;
         }
 
-        /* Nav Bar (Asli) */
         nav {
             display: flex;
             justify-content: space-between;
@@ -103,7 +105,6 @@
             color: var(--mineral-green);
         }
 
-        /* Header Section (Asli) */
         header {
             max-width: 1000px;
             margin: 0 auto 4rem auto;
@@ -136,7 +137,6 @@
             font-size: 1.1rem;
         }
 
-        /* Grid Layout (Asli) */
         .guidance-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -146,7 +146,6 @@
             padding: 0 5%;
         }
 
-        /* Step Card Style (Peningkatan Hover) */
         .step-card {
             background: var(--glass-white);
             border: 1px solid var(--glass-border);
@@ -167,7 +166,6 @@
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
         }
 
-        /* --- Perbaikan: Header dengan Angka Solid --- */
         .step-header {
             display: flex;
             align-items: center;
@@ -177,7 +175,6 @@
             padding-bottom: 1rem;
         }
 
-        /* Angka Solid Putih dengan Efek Glow saat Hover */
         .step-number {
             background: white;
             color: var(--slate-dark);
@@ -195,11 +192,7 @@
 
         .step-card:hover .step-number {
             background: #fff;
-            /* Efek lampu menyala berlapis */
-            box-shadow:
-                0 0 10px rgba(255, 255, 255, 0.8),
-                0 0 20px rgba(255, 255, 255, 0.4),
-                0 0 30px var(--mineral-green);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.4), 0 0 30px var(--mineral-green);
             transform: scale(1.1);
         }
 
@@ -208,7 +201,6 @@
             color: #fff;
         }
 
-        /* List Styling (Asli) */
         .link-list {
             list-style: none;
         }
@@ -238,7 +230,6 @@
             transform: translateX(5px);
         }
 
-        /* Specific Accents (Asli) */
         .step-card:nth-child(1) {
             border-top: 4px solid var(--mineral-green);
             animation-delay: 0.2s;
@@ -284,11 +275,11 @@
 <body>
 
     <nav>
-        <a href="index.html" class="logo">QUICK<span>VIDEO</span></a>
+        <a href="index.html" class="logo" target="_self">QUICK<span>VIDEO</span></a>
         <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="Guidance_Video.html" class="active">Guidance Cabang</a></li>
-            <li><a href="Project_operator.html">Project Operator</a></li>
+            <li><a href="index.html" target="_self">Home</a></li>
+            <li><a href="Guidance_Video.html" class="active" target="_self">Guidance Cabang</a></li>
+            <li><a href="Project_operator.html" target="_self">Project Operator</a></li>
         </ul>
         <div
             style="font-size: 0.8rem; border: 1px solid var(--mineral-green); padding: 5px 15px; border-radius: 20px; color: var(--mineral-green);">
