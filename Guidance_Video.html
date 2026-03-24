@@ -281,9 +281,9 @@
             <li><a href="Guidance_Video.html" class="active" target="_self">Guidance Cabang</a></li>
             <li><a href="Project_operator.html" target="_self">Project Operator</a></li>
         </ul>
-        <div
-            style="font-size: 0.8rem; border: 1px solid var(--mineral-green); padding: 5px 15px; border-radius: 20px; color: var(--mineral-green);">
-            Maret 2026</div>
+        <div id="current-date"
+            style="font-size: 0.8rem; border: 1px solid var(--mineral-green); padding: 5px 15px; border-radius: 20px; color: var(--mineral-green); font-weight: 600;">
+            Memuat...</div>
     </nav>
 
     <header>
@@ -326,9 +326,11 @@
                 <h2>Langkah Pembuatan</h2>
             </div>
             <ul class="link-list">
-                <li><a href="Panduan_Rekam_Wawancara.html"><i class="fas fa-microphone"></i> Panduan Rekam Video
+                <li><a href="Panduan_Rekam_Wawancara.html" target="_self"><i class="fas fa-microphone"></i> Panduan
+                        Rekam Video
                         Wawancara</a></li>
-                <li><a href="Panduan_Rekam_Lahan.html"><i class="fas fa-tractor"></i> Panduan Rekam Video Lahan</a></li>
+                <li><a href="Panduan_Rekam_Lahan.html" target="_self"><i class="fas fa-tractor"></i> Panduan Rekam Video
+                        Lahan</a></li>
             </ul>
         </div>
 
@@ -351,7 +353,8 @@
                 <h2>Upload & Pengiriman</h2>
             </div>
             <ul class="link-list">
-                <li><a href="Penamaan_Folder.html"><i class="fas fa-folder-open"></i> Ketentuan umum pengiriman dan
+                <li><a href="Penamaan_Folder.html" target="_self"><i class="fas fa-folder-open"></i> Ketentuan umum
+                        pengiriman dan
                         penamaan folder resource video.</a></li>
             </ul>
         </div>
@@ -386,6 +389,20 @@
             </ul>
         </div>
     </div>
+
+    <script>
+        function updateDate() {
+            const dateElement = document.getElementById('current-date');
+            const now = new Date();
+            const options = {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            };
+            dateElement.textContent = now.toLocaleDateString('id-ID', options);
+        }
+        updateDate();
+    </script>
 
 </body>
 
