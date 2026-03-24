@@ -292,9 +292,9 @@
             <li><a href="Guidance_Video.html">Guidance Cabang</a></li>
             <li><a href="Project_operator.html">Project Operator</a></li>
         </ul>
-        <div
-            style="font-size: 0.8rem; border: 1px solid var(--mineral-green); padding: 5px 15px; border-radius: 20px; color: var(--mineral-green);">
-            Maret 2026</div>
+        <div id="current-date"
+            style="font-size: 0.8rem; border: 1px solid var(--mineral-green); padding: 5px 15px; border-radius: 20px; color: var(--mineral-green); font-weight: 600;">
+            Memuat Tanggal...</div>
     </nav>
 
     <div class="container">
@@ -317,7 +317,6 @@
         </div>
 
         <div class="double-chart-grid">
-
             <div class="chart-box">
                 <h3 style="margin-bottom: 5px;">Kumulatif Video Kiriman</h3>
                 <p style="color: var(--text-muted); font-size: 0.8rem; margin-bottom: 40px;">Januari - Maret (Target: 6
@@ -374,7 +373,6 @@
                     <div class="line-target" style="bottom: 82px;">
                         <span class="tag-target"><i class="fas fa-bullseye"></i> 2</span>
                     </div>
-
                     <div class="bar-group"><span class="val-num">2</span>
                         <div class="bar-pill reached" style="height: 60px;"></div><span
                             class="branch-label">JOGJA</span>
@@ -412,9 +410,29 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
+
+    <script>
+        function updateDate() {
+            const dateElement = document.getElementById('current-date');
+            const now = new Date();
+
+            // Opsi format Indonesia
+            const options = {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            };
+
+            const formattedDate = now.toLocaleDateString('id-ID', options);
+
+            dateElement.textContent = formattedDate;
+        }
+
+       
+        updateDate();
+    </script>
 
 </body>
 
