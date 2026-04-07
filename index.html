@@ -141,6 +141,16 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 15px rgba(65, 179, 163, 0.2);
         }
 
+        /* Khusus Card Reject */
+        .stat-card.reject-card {
+            border-color: rgba(255, 77, 77, 0.3);
+        }
+
+        .stat-card.reject-card:hover {
+            border-color: var(--target-red);
+            box-shadow: 0 10px 30px rgba(255, 77, 77, 0.2), 0 0 15px rgba(255, 77, 77, 0.3);
+        }
+
         .stat-card i {
             position: absolute;
             right: -10px;
@@ -316,8 +326,13 @@
             </div>
             <div class="stat-card">
                 <i class="fas fa-users-gear"></i>
-                <h3>Footage & Reject</h3>
-                <div class="number">45</div>
+                <h3>Footage</h3>
+                <div class="number">33</div>
+            </div>
+            <div class="stat-card reject-card">
+                <i class="fas fa-circle-exclamation"></i>
+                <h3>Reject</h3>
+                <div class="number" style="color: var(--target-red);">9</div>
             </div>
         </div>
 
@@ -423,7 +438,6 @@
             const dateElement = document.getElementById('current-date');
             const now = new Date();
 
-            // Opsi format Indonesia
             const options = {
                 day: 'numeric',
                 month: 'long',
@@ -431,11 +445,8 @@
             };
 
             const formattedDate = now.toLocaleDateString('id-ID', options);
-
             dateElement.textContent = formattedDate;
         }
-
-       
         updateDate();
     </script>
 
