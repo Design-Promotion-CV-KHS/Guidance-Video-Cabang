@@ -12,6 +12,8 @@
         :root {
             --primary-blue: #0059FF;
             --mineral-green: #41B3A3;
+            --warning-orange: #FFB347;
+            --footage-purple: #A29BFE;
             --slate-dark: #0f172a;
             --glass-white: rgba(255, 255, 255, 0.05);
             --glass-border: rgba(255, 255, 255, 0.1);
@@ -22,35 +24,18 @@
 
         /* --- Animasi --- */
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes growUp {
-            from {
-                transform: scaleY(0);
-            }
-
-            to {
-                transform: scaleY(1);
-            }
+            from { transform: scaleY(0); }
+            to { transform: scaleY(1); }
         }
 
         @keyframes spinSlow {
-            from {
-                transform: rotate(0deg);
-            }
-
-            to {
-                transform: rotate(360deg);
-            }
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         * {
@@ -87,9 +72,7 @@
             text-decoration: none;
         }
 
-        .logo span {
-            color: var(--mineral-green);
-        }
+        .logo span { color: var(--mineral-green); }
 
         nav ul {
             display: flex;
@@ -104,9 +87,7 @@
             transition: 0.3s;
         }
 
-        nav ul li a:hover {
-            color: var(--mineral-green);
-        }
+        nav ul li a:hover { color: var(--mineral-green); }
 
         .container {
             max-width: 1400px;
@@ -115,7 +96,7 @@
             animation: fadeInUp 0.8s ease-out;
         }
 
-
+        /* --- Stats Card (REVISED FOR ALIGNMENT) --- */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -132,24 +113,37 @@
             transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
+            /* Tambahan agar sejajar */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 160px;
         }
 
-        .stat-card:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.08);
-            border-color: var(--mineral-green);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 15px rgba(65, 179, 163, 0.2);
+        .stat-card h3 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            line-height: 1.4;
+            margin-bottom: 10px;
+            z-index: 2;
         }
 
-        /* Khusus Card Reject */
-        .stat-card.reject-card {
-            border-color: rgba(255, 77, 77, 0.3);
+        .stat-card .number {
+            font-size: 2.8rem;
+            font-weight: 800;
+            z-index: 2;
+            margin-top: auto; /* Memaksa angka ke bawah agar sejajar horizontal */
         }
 
-        .stat-card.reject-card:hover {
-            border-color: var(--target-red);
-            box-shadow: 0 10px 30px rgba(255, 77, 77, 0.2), 0 0 15px rgba(255, 77, 77, 0.3);
-        }
+        /* Hover States & Colors */
+        .stat-card:hover { transform: translateY(-5px); background: rgba(255, 255, 255, 0.08); }
+        
+        .card-blue:hover { border-color: var(--primary-blue); box-shadow: 0 0 20px rgba(0, 89, 255, 0.2); }
+        .card-green:hover { border-color: var(--mineral-green); box-shadow: 0 0 20px rgba(65, 179, 163, 0.2); }
+        .card-orange:hover { border-color: var(--warning-orange); box-shadow: 0 0 20px rgba(255, 179, 71, 0.2); }
+        .card-purple:hover { border-color: var(--footage-purple); box-shadow: 0 0 20px rgba(162, 155, 254, 0.2); }
+        .card-red:hover { border-color: var(--target-red); box-shadow: 0 0 20px rgba(255, 77, 77, 0.2); }
 
         .stat-card i {
             position: absolute;
@@ -158,11 +152,6 @@
             font-size: 4rem;
             color: rgba(255, 255, 255, 0.02);
             animation: spinSlow 15s linear infinite;
-        }
-
-        .stat-card .number {
-            font-size: 2.5rem;
-            font-weight: 800;
         }
 
         /* --- Grafik Grid --- */
@@ -196,7 +185,6 @@
             padding: 0 10px;
         }
 
-        /* --- Garis Target --- */
         .line-target {
             position: absolute;
             left: 0;
@@ -227,10 +215,7 @@
             transition: all 0.3s ease;
         }
 
-        .bar-group:hover {
-            transform: scale(1.05);
-            z-index: 20;
-        }
+        .bar-group:hover { transform: scale(1.05); z-index: 20; }
 
         .val-num {
             font-size: 0.8rem;
@@ -239,12 +224,6 @@
             transition: 0.3s;
         }
 
-        .bar-group:hover .val-num {
-            color: #fff;
-            transform: translateY(-3px);
-        }
-
-        /* Batang Grafik Animasi */
         .bar-pill {
             width: 60%;
             border-radius: 6px 6px 0 0;
@@ -253,24 +232,8 @@
             transition: all 0.3s ease;
         }
 
-        .bar-pill.reached {
-            background: linear-gradient(to top, var(--mineral-green), #64ffd1);
-            box-shadow: 0 0 10px rgba(65, 179, 163, 0.2);
-        }
-
-        .bar-pill.not-reached {
-            background: linear-gradient(to top, var(--primary-blue), #5e92ff);
-        }
-
-        .bar-group:hover .bar-pill.reached {
-            box-shadow: 0 0 25px rgba(65, 179, 163, 0.6);
-            filter: brightness(1.2);
-        }
-
-        .bar-group:hover .bar-pill.not-reached {
-            box-shadow: 0 0 25px rgba(0, 89, 255, 0.5);
-            filter: brightness(1.2);
-        }
+        .bar-pill.reached { background: linear-gradient(to top, var(--mineral-green), #64ffd1); }
+        .bar-pill.not-reached { background: linear-gradient(to top, var(--primary-blue), #5e92ff); }
 
         .branch-label {
             font-size: 0.6rem;
@@ -278,17 +241,10 @@
             margin-top: 12px;
             text-transform: uppercase;
             font-weight: 700;
-            transition: 0.3s;
-        }
-
-        .bar-group:hover .branch-label {
-            color: #fff;
         }
 
         @media (max-width: 1024px) {
-            .double-chart-grid {
-                grid-template-columns: 1fr;
-            }
+            .double-chart-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -309,27 +265,27 @@
 
     <div class="container">
         <div class="stats-grid">
-            <div class="stat-card">
+            <div class="stat-card card-blue">
                 <i class="fas fa-video"></i>
                 <h3>Total Asset Video kiriman Cabang 2026</h3>
-                <div class="number">76</div>
+                <div class="number" style="color: var(--primary-blue);">76</div>
             </div>
-            <div class="stat-card">
+            <div class="stat-card card-green">
                 <i class="fas fa-clapperboard"></i>
                 <h3>Video Selesai Produksi</h3>
                 <div class="number" style="color: var(--mineral-green);">22</div>
             </div>
-            <div class="stat-card">
+            <div class="stat-card card-orange">
                 <i class="fas fa-users-gear"></i>
                 <h3>Video OK, Siap Produksi</h3>
-                <div class="number">9</div>
+                <div class="number" style="color: var(--warning-orange);">9</div>
             </div>
-            <div class="stat-card">
+            <div class="stat-card card-purple">
                 <i class="fas fa-users-gear"></i>
                 <h3>Video Ok, Untuk Footage</h3>
-                <div class="number">33</div>
+                <div class="number" style="color: var(--footage-purple);">33</div>
             </div>
-            <div class="stat-card reject-card">
+            <div class="stat-card card-red">
                 <i class="fas fa-circle-exclamation"></i>
                 <h3>Video Not Ok</h3>
                 <div class="number" style="color: var(--target-red);">9</div>
@@ -339,95 +295,39 @@
         <div class="double-chart-grid">
             <div class="chart-box">
                 <h3 style="margin-bottom: 5px;">Kiriman Video Cabang Bulan April</h3>
-                <p style="color: var(--text-muted); font-size: 0.8rem; margin-bottom: 40px;">Bulan Berjalan (Target: 2
-                    Video)</p>
+                <p style="color: var(--text-muted); font-size: 0.8rem; margin-bottom: 40px;">Bulan Berjalan (Target: 2 Video)</p>
                 <div class="bar-chart-area">
                     <div class="line-target" style="bottom: 82px;">
                         <span class="tag-target"><i class="fas fa-bullseye"></i> 2</span>
                     </div>
-                    <div class="bar-group"><span class="val-num">0</span>
-                        <div class="bar-pill not-reached" style="height: 5px;"></div><span
-                            class="branch-label">JOGJA</span>
-                    </div>
-                    <div class="bar-group"><span class="val-num">3</span>
-                        <div class="bar-pill reached" style="height: 90px;"></div><span
-                            class="branch-label">NGANJUK</span>
-                    </div>
-                    <div class="bar-group"><span class="val-num">0</span>
-                        <div class="bar-pill not-reached" style="height: 5px;"></div><span class="branch-label">MKSR</span>
-                    </div>
-                    <div class="bar-group"><span class="val-num">0</span>
-                        <div class="bar-pill not-reached" style="height: 5px;"></div><span
-                            class="branch-label">MEDAN</span>
-                    </div>
-                    <div class="bar-group"><span class="val-num">0</span>
-                        <div class="bar-pill not-reached" style="height: 5px;"></div><span
-                            class="branch-label">PKBARU</span>
-                    </div>
-                    <div class="bar-group"><span class="val-num">0</span>
-                        <div class="bar-pill not-reached" style="height: 5px;"></div><span
-                            class="branch-label">LMPG</span>
-                    </div>
-                    <div class="bar-group"><span class="val-num">0</span>
-                        <div class="bar-pill not-reached" style="height: 5px;"></div><span
-                            class="branch-label">BJM</span>
-                    </div>
-                    <div class="bar-group"><span class="val-num">0</span>
-                        <div class="bar-pill not-reached" style="height: 5px;"></div><span
-                            class="branch-label">PALU</span>
-                    </div>
-                    <div class="bar-group"><span class="val-num">2</span>
-                        <div class="bar-pill reached" style="height: 60px;"></div><span
-                            class="branch-label">CIANJUR</span>
-                    </div>
+                    <div class="bar-group"><span class="val-num">0</span><div class="bar-pill not-reached" style="height: 5px;"></div><span class="branch-label">JOGJA</span></div>
+                    <div class="bar-group"><span class="val-num">3</span><div class="bar-pill reached" style="height: 90px;"></div><span class="branch-label">NGANJUK</span></div>
+                    <div class="bar-group"><span class="val-num">0</span><div class="bar-pill not-reached" style="height: 5px;"></div><span class="branch-label">MKSR</span></div>
+                    <div class="bar-group"><span class="val-num">0</span><div class="bar-pill not-reached" style="height: 5px;"></div><span class="branch-label">MEDAN</span></div>
+                    <div class="bar-group"><span class="val-num">0</span><div class="bar-pill not-reached" style="height: 5px;"></div><span class="branch-label">PKBARU</span></div>
+                    <div class="bar-group"><span class="val-num">0</span><div class="bar-pill not-reached" style="height: 5px;"></div><span class="branch-label">LMPG</span></div>
+                    <div class="bar-group"><span class="val-num">0</span><div class="bar-pill not-reached" style="height: 5px;"></div><span class="branch-label">BJM</span></div>
+                    <div class="bar-group"><span class="val-num">0</span><div class="bar-pill not-reached" style="height: 5px;"></div><span class="branch-label">PALU</span></div>
+                    <div class="bar-group"><span class="val-num">2</span><div class="bar-pill reached" style="height: 60px;"></div><span class="branch-label">CIANJUR</span></div>
                 </div>
             </div>
 
             <div class="chart-box">
                 <h3 style="margin-bottom: 5px;">Kumulatif Video Kiriman Cabang</h3>
-                <p style="color: var(--text-muted); font-size: 0.8rem; margin-bottom: 40px;">Januari - April (Target: 8
-                    Video)</p>
+                <p style="color: var(--text-muted); font-size: 0.8rem; margin-bottom: 40px;">Januari - April (Target: 8 Video)</p>
                 <div class="bar-chart-area">
                     <div class="line-target" style="bottom: 102px;">
                         <span class="tag-target"> <i class="fas fa-bullseye"></i> 8 </span>
                     </div>
-
-                    <div class="bar-group"><span class="val-num">6</span>
-                        <div class="bar-pill not-reached" style="height: 60px;"></div><span
-                            class="branch-label">JOGJA</span>
-                    </div>
-                    <div class="bar-group"><span class="val-num">23</span>
-                        <div class="bar-pill reached" style="height: 180px;"></div><span
-                            class="branch-label">NGANJUK</span>
-                    </div>
-                    <div class="bar-group"><span class="val-num">8</span>
-                        <div class="bar-pill reached" style="height: 80px;"></div><span
-                            class="branch-label">MKSR</span>
-                    </div>
-                    <div class="bar-group"><span class="val-num">7</span>
-                        <div class="bar-pill not-reached" style="height: 70px;"></div><span
-                            class="branch-label">MEDAN</span>
-                    </div>
-                    <div class="bar-group"><span class="val-num">6</span>
-                        <div class="bar-pill not-reached" style="height: 60px;"></div><span
-                            class="branch-label">PKBARU</span>
-                    </div>
-                    <div class="bar-group"><span class="val-num">6</span>
-                        <div class="bar-pill not-reached" style="height: 60px;"></div><span
-                            class="branch-label">LMPG</span>
-                    </div>
-                    <div class="bar-group"><span class="val-num">7</span>
-                        <div class="bar-pill not-reached" style="height: 70px;"></div><span
-                            class="branch-label">BJM</span>
-                    </div>
-                    <div class="bar-group"><span class="val-num">6</span>
-                        <div class="bar-pill not-reached" style="height: 60px;"></div><span
-                            class="branch-label">PALU</span>
-                    </div>
-                    <div class="bar-group"><span class="val-num">8</span>
-                        <div class="bar-pill reached" style="height: 80px;"></div><span
-                            class="branch-label">CIANJUR</span>
-                    </div>
+                    <div class="bar-group"><span class="val-num">6</span><div class="bar-pill not-reached" style="height: 60px;"></div><span class="branch-label">JOGJA</span></div>
+                    <div class="bar-group"><span class="val-num">23</span><div class="bar-pill reached" style="height: 180px;"></div><span class="branch-label">NGANJUK</span></div>
+                    <div class="bar-group"><span class="val-num">8</span><div class="bar-pill reached" style="height: 80px;"></div><span class="branch-label">MKSR</span></div>
+                    <div class="bar-group"><span class="val-num">7</span><div class="bar-pill not-reached" style="height: 70px;"></div><span class="branch-label">MEDAN</span></div>
+                    <div class="bar-group"><span class="val-num">6</span><div class="bar-pill not-reached" style="height: 60px;"></div><span class="branch-label">PKBARU</span></div>
+                    <div class="bar-group"><span class="val-num">6</span><div class="bar-pill not-reached" style="height: 60px;"></div><span class="branch-label">LMPG</span></div>
+                    <div class="bar-group"><span class="val-num">7</span><div class="bar-pill not-reached" style="height: 70px;"></div><span class="branch-label">BJM</span></div>
+                    <div class="bar-group"><span class="val-num">6</span><div class="bar-pill not-reached" style="height: 60px;"></div><span class="branch-label">PALU</span></div>
+                    <div class="bar-group"><span class="val-num">8</span><div class="bar-pill reached" style="height: 80px;"></div><span class="branch-label">CIANJUR</span></div>
                 </div>
             </div>
         </div>
@@ -437,19 +337,10 @@
         function updateDate() {
             const dateElement = document.getElementById('current-date');
             const now = new Date();
-
-            const options = {
-                day: 'numeric',
-                month: 'long',
-                year: 'numeric'
-            };
-
-            const formattedDate = now.toLocaleDateString('id-ID', options);
-            dateElement.textContent = formattedDate;
+            const options = { day: 'numeric', month: 'long', year: 'numeric' };
+            dateElement.textContent = now.toLocaleDateString('id-ID', options);
         }
         updateDate();
     </script>
-
 </body>
-
 </html>
