@@ -32,7 +32,7 @@
 
         .container { max-width: 1400px; margin: 0 auto; padding: 2rem 5%; animation: fadeInUp 0.8s ease-out; }
 
-        /* --- Stats Card (Fixed Alignment) --- */
+        /* --- Stats Card --- */
         .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 2.5rem; }
         .stat-card {
             background: var(--glass-white); border: 1px solid var(--glass-border); padding: 1.5rem; border-radius: 20px;
@@ -58,12 +58,16 @@
         .bar-group { flex: 1; display: flex; flex-direction: column; align-items: center; z-index: 5; }
         .val-num { font-size: 0.8rem; font-weight: 800; margin-bottom: 6px; }
         
-        /* Bar Animation Fix */
         .bar-pill { width: 60%; border-radius: 6px 6px 0 0; transform-origin: bottom; animation: growUp 1.2s ease-out forwards; transition: height 0.5s ease; }
         .bar-pill.reached { background: linear-gradient(to top, var(--mineral-green), #64ffd1); }
         .bar-pill.not-reached { background: linear-gradient(to top, var(--primary-blue), #5e92ff); }
         
         .branch-label { font-size: 0.6rem; color: var(--text-muted); margin-top: 12px; text-transform: uppercase; font-weight: 700; }
+
+        /* New Footer for Charts */
+        .chart-footer { margin-top: 20px; padding-top: 15px; border-top: 1px solid var(--glass-border); display: flex; justify-content: space-between; align-items: center; }
+        .total-label { font-size: 0.75rem; color: var(--text-muted); font-weight: 600; }
+        .total-value { font-size: 1.1rem; font-weight: 800; color: var(--mineral-green); }
 
         @media (max-width: 1024px) { .double-chart-grid { grid-template-columns: 1fr; } }
     </style>
@@ -82,16 +86,24 @@
 
     <div class="container">
         <div class="stats-grid">
-            <div class="stat-card card-blue"><i class="fas fa-video"></i><h3>Total Asset Video kiriman Cabang 2026</h3><div class="number" style="color: var(--primary-blue);">80</div></div>
-            <div class="stat-card card-green"><i class="fas fa-clapperboard"></i><h3>Video Selesai Produksi</h3><div class="number" style="color: var(--mineral-green);">22</div></div>
+            <div class="stat-card card-blue">
+                <i class="fas fa-video"></i>
+                <h3>Total Kumulatif Seluruh Cabang</h3>
+                <div class="number" id="total-cumulative-stat" style="color: var(--primary-blue);">0</div>
+            </div>
+            <div class="stat-card card-green">
+                <i class="fas fa-calendar-check"></i>
+                <h3>Total Kiriman Bulan Ini</h3>
+                <div class="number" id="total-monthly-stat" style="color: var(--mineral-green);">0</div>
+            </div>
             <div class="stat-card card-orange"><i class="fas fa-users-gear"></i><h3>Video OK, Siap Produksi</h3><div class="number" style="color: var(--warning-orange);">10</div></div>
-            <div class="stat-card card-purple"><i class="fas fa-users-gear"></i><h3>Video Ok, Untuk Footage</h3><div class="number" style="color: var(--footage-purple);">34</div></div>
+            <div class="stat-card card-purple"><i class="fas fa-film"></i><h3>Video Ok, Untuk Footage</h3><div class="number" style="color: var(--footage-purple);">34</div></div>
             <div class="stat-card card-red"><i class="fas fa-circle-exclamation"></i><h3>Video Not Ok</h3><div class="number" style="color: var(--target-red);">9</div></div>
         </div>
 
         <div class="double-chart-grid">
             <div class="chart-box" id="monthly-chart-box">
-                <h3 id="realtime-chart-title" style="margin-bottom: 5px;">Memuat Judul...</h3>
+                <h3 id="realtime-chart-title" style="margin-bottom: 5px;">Kiriman Video</h3>
                 <p style="color: var(--text-muted); font-size: 0.8rem; margin-bottom: 40px;">Bulan Berjalan (Target: 2 Video)</p>
                 <div class="bar-chart-area">
                     <div class="line-target" style="bottom: 82px;"><span class="tag-target"><i class="fas fa-bullseye"></i> 2</span></div>
@@ -105,9 +117,13 @@
                     <div class="bar-group"><span class="val-num">0</span><div class="bar-pill not-reached" style="height: 5px;"></div><span class="branch-label">PALU</span></div>
                     <div class="bar-group"><span class="val-num">2</span><div class="bar-pill reached" style="height: 60px;"></div><span class="branch-label">CIANJUR</span></div>
                 </div>
+                <div class="chart-footer">
+                    <span class="total-label">TOTAL BULAN INI</span>
+                    <span class="total-value" id="total-monthly-val">0</span>
+                </div>
             </div>
 
-            <div class="chart-box">
+            <div class="chart-box" id="cumulative-chart-box">
                 <h3 style="margin-bottom: 5px;">Kumulatif Video Kiriman Cabang</h3>
                 <p style="color: var(--text-muted); font-size: 0.8rem; margin-bottom: 40px;">Januari - April (Target: 8 Video)</p>
                 <div class="bar-chart-area">
@@ -122,27 +138,52 @@
                     <div class="bar-group"><span class="val-num">6</span><div class="bar-pill not-reached" style="height: 60px;"></div><span class="branch-label">PALU</span></div>
                     <div class="bar-group"><span class="val-num">8</span><div class="bar-pill reached" style="height: 80px;"></div><span class="branch-label">CIANJUR</span></div>
                 </div>
+                <div class="chart-footer">
+                    <span class="total-label">TOTAL KUMULATIF 2026</span>
+                    <span class="total-value" id="total-cumulative-val">0</span>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // 1. Update Tanggal & Judul
             const dateElement = document.getElementById('current-date');
             const titleElement = document.getElementById('realtime-chart-title');
             const now = new Date();
-            const dateOnly = now.getDate();
-
-            // 1. Update Tanggal Navbar
+            
             dateElement.textContent = now.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
-
-            // 2. Update Judul Grafik Bulan Berjalan secara Dinamis
             const monthYear = now.toLocaleDateString('id-ID', { month: 'long', year: 'numeric' });
             titleElement.textContent = `Kiriman Video Cabang Bulan ${monthYear}`;
 
+            // 2. Fungsi Hitung Total Otomatis
+            function updateTotals() {
+                // Hitung Bulanan
+                let monthlyTotal = 0;
+                document.querySelectorAll('#monthly-chart-box .val-num').forEach(num => {
+                    monthlyTotal += parseInt(num.textContent) || 0;
+                });
+                
+                // Hitung Kumulatif
+                let cumulativeTotal = 0;
+                document.querySelectorAll('#cumulative-chart-box .val-num').forEach(num => {
+                    cumulativeTotal += parseInt(num.textContent) || 0;
+                });
+
+                // Update Angka di UI (Tabel & Card)
+                document.getElementById('total-monthly-val').textContent = monthlyTotal;
+                document.getElementById('total-monthly-stat').textContent = monthlyTotal;
+                
+                document.getElementById('total-cumulative-val').textContent = cumulativeTotal;
+                document.getElementById('total-cumulative-stat').textContent = cumulativeTotal;
+            }
+
+            // Jalankan hitungan pertama kali
+            updateTotals();
+
             // 3. LOGIKA AUTO-RESET (Jika Tanggal 1)
-            // Sistem akan mengubah angka jadi 0 dan memendekkan batang grafik di tabel kiri saja.
-            if (dateOnly === 1) {
+            if (now.getDate() === 1) {
                 const monthlyBox = document.getElementById('monthly-chart-box');
                 const values = monthlyBox.querySelectorAll('.val-num');
                 const bars = monthlyBox.querySelectorAll('.bar-pill');
@@ -153,7 +194,7 @@
                     b.classList.remove('reached');
                     b.classList.add('not-reached');
                 });
-                console.log("Awal bulan terdeteksi: Grafik bulanan direset otomatis.");
+                updateTotals(); // Hitung ulang setelah reset
             }
         });
     </script>
