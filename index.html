@@ -13,7 +13,6 @@
             --glass-border: rgba(255, 255, 255, 0.1); --text-main: #f8fafc; --text-muted: #94a3b8; --target-red: #ff4d4d;
         }
 
-        /* --- Animasi --- */
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes growUp { from { transform: scaleY(0); } to { transform: scaleY(1); } }
         @keyframes spinSlow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
@@ -21,7 +20,6 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
         body { background: radial-gradient(circle at top right, #1e293b, #0f172a); color: var(--text-main); min-height: 100vh; overflow-x: hidden; }
 
-        /* --- Navbar --- */
         nav { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 8%; background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(15px); border-bottom: 1px solid var(--glass-border); position: sticky; top: 0; z-index: 100; }
         .logo { font-weight: 800; font-size: 1.2rem; color: #fff; text-decoration: none; }
         .logo span { color: var(--mineral-green); }
@@ -32,7 +30,6 @@
 
         .container { max-width: 1400px; margin: 0 auto; padding: 2rem 5%; animation: fadeInUp 0.8s ease-out; }
 
-        /* --- Stats Card --- */
         .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 2.5rem; }
         .stat-card {
             background: var(--glass-white); border: 1px solid var(--glass-border); padding: 1.5rem; border-radius: 20px;
@@ -49,7 +46,6 @@
         .card-purple:hover { border-color: var(--footage-purple); box-shadow: 0 0 20px rgba(162, 155, 254, 0.2); }
         .card-red:hover { border-color: var(--target-red); box-shadow: 0 0 20px rgba(255, 77, 77, 0.2); }
 
-        /* --- Grafik Grid --- */
         .double-chart-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
         .chart-box { background: rgba(15, 23, 42, 0.5); border: 1px solid var(--glass-border); padding: 2.5rem 1.5rem; border-radius: 24px; position: relative; }
         .bar-chart-area { height: 220px; display: flex; align-items: flex-end; justify-content: space-between; position: relative; border-bottom: 2px solid var(--glass-border); padding: 0 10px; }
@@ -64,7 +60,6 @@
         
         .branch-label { font-size: 0.6rem; color: var(--text-muted); margin-top: 12px; text-transform: uppercase; font-weight: 700; }
 
-        /* New Footer for Charts */
         .chart-footer { margin-top: 20px; padding-top: 15px; border-top: 1px solid var(--glass-border); display: flex; justify-content: space-between; align-items: center; }
         .total-label { font-size: 0.75rem; color: var(--text-muted); font-weight: 600; }
         .total-value { font-size: 1.1rem; font-weight: 800; color: var(--mineral-green); }
@@ -91,14 +86,30 @@
                 <h3>Total Kumulatif Seluruh Cabang</h3>
                 <div class="number" id="total-cumulative-stat" style="color: var(--primary-blue);">0</div>
             </div>
-            <div class="stat-card card-blue">
-                <i class="fas fa-calendar-check"></i>
-                <h3>Total Kiriman Bulan Ini</h3>
-                <div class="number" id="total-monthly-stat" style="color: var(--primary-blue);">0</div>
+
+            <div class="stat-card card-orange">
+                <i class="fas fa-clock"></i>
+                <h3>Video OK, Menunggu Giliran Edit</h3>
+                <div class="number" style="color: var(--warning-orange);">10</div>
             </div>
-            <div class="stat-card card-green"><i class="fas fa-users-gear"></i><h3>Video Berhasil Produksi</h3><div class="number" style="color: var(--mineral-green);">26</div></div>
-            <div class="stat-card card-purple"><i class="fas fa-film"></i><h3>Video Ok, Untuk Footage</h3><div class="number" style="color: var(--footage-purple);">37</div></div>
-            <div class="stat-card card-red"><i class="fas fa-circle-exclamation"></i><h3>Video Not Ok</h3><div class="number" style="color: var(--target-red);">10</div></div>
+
+            <div class="stat-card card-green">
+                <i class="fas fa-users-gear"></i>
+                <h3>Video Berhasil Produksi</h3>
+                <div class="number" style="color: var(--mineral-green);">26</div>
+            </div>
+
+            <div class="stat-card card-purple">
+                <i class="fas fa-film"></i>
+                <h3>Video Ok, Untuk Footage</h3>
+                <div class="number" style="color: var(--footage-purple);">37</div>
+            </div>
+
+            <div class="stat-card card-red">
+                <i class="fas fa-circle-exclamation"></i>
+                <h3>Video Not Ok</h3>
+                <div class="number" style="color: var(--target-red);">10</div>
+            </div>
         </div>
 
         <div class="double-chart-grid">
@@ -148,7 +159,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // 1. Update Tanggal & Judul
+            // 1. Update Tanggal Otomatis
             const dateElement = document.getElementById('current-date');
             const titleElement = document.getElementById('realtime-chart-title');
             const now = new Date();
@@ -160,46 +171,36 @@
 
             // 2. Fungsi Hitung Total Otomatis
             function updateTotals() {
-                // Hitung Bulanan
+                // Hitung Bulanan dari Chart
                 let monthlyTotal = 0;
                 document.querySelectorAll('#monthly-chart-box .val-num').forEach(num => {
                     monthlyTotal += parseInt(num.textContent) || 0;
                 });
                 
-                // Hitung Kumulatif
+                // Hitung Kumulatif dari Chart
                 let cumulativeTotal = 0;
                 document.querySelectorAll('#cumulative-chart-box .val-num').forEach(num => {
                     cumulativeTotal += parseInt(num.textContent) || 0;
                 });
 
-                // Update UI dengan aman (Cek dulu apakah elemennya ada)
-                const uiElements = {
-                    'total-monthly-val': monthlyTotal,
-                    'total-monthly-stat': monthlyTotal,
-                    'total-cumulative-val': cumulativeTotal,
-                    'total-cumulative-stat': cumulativeTotal
-                };
+                // Update ID yang ada saja
+                const elMonthlyFooter = document.getElementById('total-monthly-val');
+                const elCumulFooter = document.getElementById('total-cumulative-val');
+                const elCumulStatCard = document.getElementById('total-cumulative-stat');
 
-                for (let id in uiElements) {
-                    const el = document.getElementById(id);
-                    if (el) {
-                        el.textContent = uiElements[id];
-                    }
-                }
+                if(elMonthlyFooter) elMonthlyFooter.textContent = monthlyTotal;
+                if(elCumulFooter) elCumulFooter.textContent = cumulativeTotal;
+                if(elCumulStatCard) elCumulStatCard.textContent = cumulativeTotal;
             }
 
-            // Jalankan hitungan pertama kali
             updateTotals();
 
-            // 3. LOGIKA AUTO-RESET (Hanya jika Tanggal 1)
+            // 3. LOGIKA AUTO-RESET (Tgl 1)
             if (now.getDate() === 1) {
                 const monthlyBox = document.getElementById('monthly-chart-box');
                 if (monthlyBox) {
-                    const values = monthlyBox.querySelectorAll('.val-num');
-                    const bars = monthlyBox.querySelectorAll('.bar-pill');
-
-                    values.forEach(v => v.textContent = "0");
-                    bars.forEach(b => {
+                    monthlyBox.querySelectorAll('.val-num').forEach(v => v.textContent = "0");
+                    monthlyBox.querySelectorAll('.bar-pill').forEach(b => {
                         b.style.height = "5px";
                         b.classList.remove('reached');
                         b.classList.add('not-reached');
