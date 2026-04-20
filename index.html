@@ -91,8 +91,12 @@
                 <h3>Total Kumulatif Seluruh Cabang</h3>
                 <div class="number" id="total-cumulative-stat" style="color: var(--primary-blue);">0</div>
             </div>
+            <div class="stat-card card-blue">
+                <i class="fas fa-calendar-check"></i>
+                <h3>Total Kiriman Bulan Ini</h3>
+                <div class="number" id="total-monthly-stat" style="color: var(--primary-blue);">0</div>
+            </div>
             <div class="stat-card card-green"><i class="fas fa-users-gear"></i><h3>Video Berhasil Produksi</h3><div class="number" style="color: var(--mineral-green);">26</div></div>
-            <div class="stat-card card-orange"><i class="fas fa-users-gear"></i><h3>Video OK, Siap Produksi</h3><div class="number" style="color: var(--warning-orange);">10</div></div>
             <div class="stat-card card-purple"><i class="fas fa-film"></i><h3>Video Ok, Untuk Footage</h3><div class="number" style="color: var(--footage-purple);">37</div></div>
             <div class="stat-card card-red"><i class="fas fa-circle-exclamation"></i><h3>Video Not Ok</h3><div class="number" style="color: var(--target-red);">10</div></div>
         </div>
@@ -149,9 +153,10 @@
             const titleElement = document.getElementById('realtime-chart-title');
             const now = new Date();
             
-            dateElement.textContent = now.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+            if(dateElement) dateElement.textContent = now.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+            
             const monthYear = now.toLocaleDateString('id-ID', { month: 'long', year: 'numeric' });
-            titleElement.textContent = `Kiriman Video Cabang Bulan ${monthYear}`;
+            if(titleElement) titleElement.textContent = `Kiriman Video Cabang Bulan ${monthYear}`;
 
             // 2. Fungsi Hitung Total Otomatis
             function updateTotals() {
@@ -167,30 +172,40 @@
                     cumulativeTotal += parseInt(num.textContent) || 0;
                 });
 
-                // Update Angka di UI (Tabel & Card)
-                document.getElementById('total-monthly-val').textContent = monthlyTotal;
-                document.getElementById('total-monthly-stat').textContent = monthlyTotal;
-                
-                document.getElementById('total-cumulative-val').textContent = cumulativeTotal;
-                document.getElementById('total-cumulative-stat').textContent = cumulativeTotal;
+                // Update UI dengan aman (Cek dulu apakah elemennya ada)
+                const uiElements = {
+                    'total-monthly-val': monthlyTotal,
+                    'total-monthly-stat': monthlyTotal,
+                    'total-cumulative-val': cumulativeTotal,
+                    'total-cumulative-stat': cumulativeTotal
+                };
+
+                for (let id in uiElements) {
+                    const el = document.getElementById(id);
+                    if (el) {
+                        el.textContent = uiElements[id];
+                    }
+                }
             }
 
             // Jalankan hitungan pertama kali
             updateTotals();
 
-            // 3. LOGIKA AUTO-RESET (Jika Tanggal 1)
+            // 3. LOGIKA AUTO-RESET (Hanya jika Tanggal 1)
             if (now.getDate() === 1) {
                 const monthlyBox = document.getElementById('monthly-chart-box');
-                const values = monthlyBox.querySelectorAll('.val-num');
-                const bars = monthlyBox.querySelectorAll('.bar-pill');
+                if (monthlyBox) {
+                    const values = monthlyBox.querySelectorAll('.val-num');
+                    const bars = monthlyBox.querySelectorAll('.bar-pill');
 
-                values.forEach(v => v.textContent = "0");
-                bars.forEach(b => {
-                    b.style.height = "5px";
-                    b.classList.remove('reached');
-                    b.classList.add('not-reached');
-                });
-                updateTotals(); // Hitung ulang setelah reset
+                    values.forEach(v => v.textContent = "0");
+                    bars.forEach(b => {
+                        b.style.height = "5px";
+                        b.classList.remove('reached');
+                        b.classList.add('not-reached');
+                    });
+                    updateTotals();
+                }
             }
         });
     </script>
