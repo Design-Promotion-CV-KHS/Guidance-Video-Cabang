@@ -49,7 +49,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 1.5rem 8%;
-            background: rgba(15, 23, 42, 0.7);
+            background: rgba(15, 23, 42, 0.8);
             backdrop-filter: blur(15px);
             border-bottom: 1px solid var(--glass-border);
             position: sticky;
@@ -85,9 +85,11 @@
         nav ul li a.active {
             color: var(--mineral-green);
         }
+
+        /* BAGIAN HEADER DENGAN JARAK KE NAVBAR */
         header {
             max-width: 1000px;
-            margin: 0 auto 4rem auto;
+            margin: 80px auto 4rem auto; /* Jarak 80px dari atas (Navbar) */
             text-align: center;
             padding: 0 5%;
             animation: fadeInUp 0.8s ease-out forwards;
@@ -106,10 +108,16 @@
             text-transform: uppercase;
         }
 
+        .subtitle {
+            color: var(--text-muted);
+            margin-top: 1rem;
+            font-size: 1rem;
+        }
+
         .container {
             max-width: 1280px;
             margin: 0 auto;
-            padding: 3rem 5%;
+            padding: 0 5%;
         }
 
         .workflow-grid {
@@ -158,9 +166,7 @@
         }
 
         .workflow-card:hover .step-number {
-            box-shadow:
-                0 0 10px rgba(255, 255, 255, 0.8),
-                0 0 20px var(--mineral-green);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px var(--mineral-green);
             transform: scale(1.1);
         }
 
@@ -292,6 +298,10 @@
             .workflow-grid {
                 grid-template-columns: 1fr;
             }
+            
+            header {
+                margin: 40px auto 2rem auto;
+            }
         }
     </style>
 </head>
@@ -315,9 +325,10 @@
         <h1>Pusat Guidance Editing Video</h1>
         <p class="subtitle">Ikuti langkah-langkah di bawah ini untuk pengeditan video yang lebih efisien dan berkualitas.</p>
     </header>
-    
+
     <div class="container">
         <div class="workflow-grid">
+            <!-- Langkah 1 -->
             <div class="workflow-card">
                 <div class="step-header">
                     <div class="step-number">A</div>
@@ -336,6 +347,7 @@
                 </ul>
             </div>
 
+            <!-- Langkah 2 -->
             <div class="workflow-card">
                 <div class="step-header">
                     <div class="step-number">B</div>
@@ -353,6 +365,7 @@
                 </ul>
             </div>
 
+            <!-- Langkah 3 -->
             <div class="workflow-card">
                 <div class="step-header">
                     <div class="step-number">C</div>
@@ -373,6 +386,7 @@
                 </ul>
             </div>
 
+            <!-- Langkah 4 -->
             <div class="workflow-card">
                 <div class="step-header">
                     <div class="step-number">D</div>
@@ -389,6 +403,7 @@
                 </ul>
             </div>
 
+            <!-- Langkah 5 -->
             <div class="workflow-card">
                 <div class="step-header">
                     <div class="step-number">E</div>
@@ -402,6 +417,7 @@
                 </ul>
             </div>
 
+            <!-- Langkah 6 -->
             <div class="workflow-card">
                 <div class="step-header">
                     <div class="step-number">F</div>
