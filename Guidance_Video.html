@@ -141,7 +141,7 @@
             background: var(--glass-white);
             border: 1px solid var(--glass-border);
             border-radius: 28px;
-            padding: 2rem;
+            padding: 2.5rem;
             position: relative;
             overflow: hidden;
             backdrop-filter: blur(10px);
@@ -187,7 +187,7 @@
 
         .link-list { list-style: none; }
 
-        .link-list li { margin-bottom: 0.8rem; }
+        .link-list li { margin-bottom: 1rem; }
 
         .link-list a {
             text-decoration: none;
@@ -206,28 +206,27 @@
             min-width: 20px;
         }
 
-        /* --- Styling Khusus Anak Poin --- */
+        /* --- Styling Anak Poin (Dot Style) --- */
         .sub-list {
             margin-left: 2rem;
-            margin-top: 0.5rem;
-            padding-left: 1rem;
-            border-left: 2px dashed rgba(65, 179, 163, 0.3);
+            margin-top: 0.6rem;
             list-style: none;
         }
 
         .sub-list li {
-            margin-bottom: 0.6rem;
+            margin-bottom: 0.5rem;
         }
 
         .sub-list a {
             font-size: 0.85rem !important;
             color: #94a3b8;
+            align-items: center; /* Menyejajarkan dot dengan teks */
         }
 
         .sub-list a i {
-            font-size: 0.7rem;
-            margin-top: 4px;
+            font-size: 0.4rem; /* Ukuran dot kecil */
             color: var(--mineral-green);
+            margin-top: 2px;
         }
 
         .link-list a:hover {
@@ -286,7 +285,7 @@
             </ul>
         </div>
 
-        <!-- Card B (Updated) -->
+        <!-- Card B (Updated with Dots) -->
         <div class="step-card">
             <div class="step-header">
                 <div class="step-number">B</div>
@@ -300,16 +299,15 @@
                     <a href="javascript:void(0)" style="cursor: default; pointer-events: none;">
                         <span class="step-idx">7.</span> Panduan Rekam Video Lahan
                     </a>
-                    <!-- Anak Poin / Sub-list -->
                     <ul class="sub-list">
-                        <li><a href="Lahan_Kering.html" target="_self"><i class="fas fa-chevron-right"></i> Lahan Kering</a></li>
-                        <li><a href="Lahan_Basah.html" target="_self"><i class="fas fa-chevron-right"></i> Lahan Basah</a></li>
-                        <li><a href="Guludan_Lebar.html" target="_self"><i class="fas fa-chevron-right"></i> Guludan Lebar</a></li>
-                        <li><a href="Guludan_Sempit.html" target="_self"><i class="fas fa-chevron-right"></i> Guludan Sempit</a></li>
-                        <li><a href="Detail_Part.html" target="_self"><i class="fas fa-chevron-right"></i> Detail Part Mesin</a></li>
-                        <li><a href="Sebelum_Olah.html" target="_self"><i class="fas fa-chevron-right"></i> Tahap: Sebelum Diolah</a></li>
-                        <li><a href="Saat_Olah.html" target="_self"><i class="fas fa-chevron-right"></i> Tahap: Saat Diolah</a></li>
-                        <li><a href="Setelah_Olah.html" target="_self"><i class="fas fa-chevron-right"></i> Tahap: Setelah Diolah</a></li>
+                        <li><a href="Lahan_Kering.html" target="_self"><i class="fas fa-circle"></i> Lahan Kering</a></li>
+                        <li><a href="Lahan_Basah.html" target="_self"><i class="fas fa-circle"></i> Lahan Basah</a></li>
+                        <li><a href="Guludan_Lebar.html" target="_self"><i class="fas fa-circle"></i> Guludan Lebar</a></li>
+                        <li><a href="Guludan_Sempit.html" target="_self"><i class="fas fa-circle"></i> Guludan Sempit</a></li>
+                        <li><a href="Detail_Part.html" target="_self"><i class="fas fa-circle"></i> Detail Part Mesin</a></li>
+                        <li><a href="Sebelum_Olah.html" target="_self"><i class="fas fa-circle"></i> Tahap: Sebelum Diolah</a></li>
+                        <li><a href="Saat_Olah.html" target="_self"><i class="fas fa-circle"></i> Tahap: Saat Diolah</a></li>
+                        <li><a href="Setelah_Olah.html" target="_self"><i class="fas fa-circle"></i> Tahap: Setelah Diolah</a></li>
                     </ul>
                 </li>
             </ul>
