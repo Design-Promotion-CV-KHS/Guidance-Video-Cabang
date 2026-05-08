@@ -166,6 +166,12 @@
             max-width: 100%;
             border-radius: 10px;
         }
+
+        @media (max-width: 1000px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 
@@ -188,6 +194,17 @@
         </div>
 
         <div class="details-panel">
+
+            <div class="angle-guide">
+                <h3><i class="fas fa-camera"></i> Panduan Sudut Pandang</h3>
+                <p style="font-size: 0.85rem; color: #94a3b8;">Posisi kamera tinggi untuk memperlihatkan jalur guludan
+                    yang rapat.</p>
+                <div class="angle-img-container">
+                    <img src="SPGS.png" alt="Panduan Sudut Pandang Guludan Sempit">
+                </div>
+            </div>
+
+
             <div class="info-card">
                 <h3><i class="fas fa-list-check"></i> Keterangan Video</h3>
                 <ul class="keterangan-list">
@@ -200,15 +217,6 @@
                     <li><i class="fas fa-ruler-combined"></i> <span><strong>Tunjukkan Dimensi:</strong> Sudut pandang
                             tinggi ini bertujuan agar guludan benar-benar terlihat sempit secara perspektif.</span></li>
                 </ul>
-            </div>
-
-            <div class="angle-guide">
-                <h3><i class="fas fa-camera"></i> Panduan Sudut Pandang</h3>
-                <p style="font-size: 0.85rem; color: #94a3b8;">Posisi kamera tinggi untuk memperlihatkan jalur guludan
-                    yang rapat.</p>
-                <div class="angle-img-container">
-                    <img src="SPGS.png" alt="Panduan Sudut Pandang Guludan Sempit">
-                </div>
             </div>
         </div>
     </div>
