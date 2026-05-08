@@ -167,7 +167,8 @@
 
         .tab-content.active {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            /* Perubahan: Menukar urutan grid agar foto (pertama di HTML) di kiri */
+            grid-template-columns: 1fr 1fr; 
             gap: 40px;
             align-items: start;
         }
@@ -209,6 +210,13 @@
             overflow: hidden;
             border: 1px solid var(--glass-border);
             background: #000;
+            /* Tambahan: Memastikan visual di sebelah kiri jika menggunakan order flex/grid manual, 
+               tapi karena urutan HTML sudah diubah, ini tidak wajib, namun baik untuk eksplisit */
+            order: 1; 
+        }
+
+        .text-info {
+             order: 2; /* Teks di sebelah kanan */
         }
 
         .visual-preview img {
@@ -239,6 +247,14 @@
         @media (max-width: 850px) {
             .tab-content.active {
                 grid-template-columns: 1fr;
+            }
+            
+            /* Pada mobile, kembalikan urutan: Gambar dulu, lalu teks di bawahnya */
+            .visual-preview {
+                order: 1;
+            }
+            .text-info {
+                order: 2;
             }
 
             .tab-nav {
@@ -288,7 +304,13 @@
             </button>
         </div>
 
+        <!-- Tab Konten: Urutan HTML diubah agar .visual-preview sebelum .text-info -->
+
         <div id="light" class="tab-content active">
+            <div class="visual-preview">
+                <img src="Gemini_Generated_Image_ymex40ymex40ymex.png" alt="Pencahayaan">
+                <div class="image-tag">Visual: Hadap Cahaya (Benar)</div>
+            </div>
             <div class="text-info">
                 <h2>1. Pencahayaan (Lighting)</h2>
                 <ul>
@@ -300,13 +322,13 @@
                             cerah agar tidak ada bayangan kasar.</span></li>
                 </ul>
             </div>
-            <div class="visual-preview">
-                <img src="Gemini_Generated_Image_ymex40ymex40ymex.png" alt="Pencahayaan">
-                <div class="image-tag">Visual: Hadap Cahaya (Benar)</div>
-            </div>
         </div>
 
         <div id="audio" class="tab-content">
+            <div class="visual-preview">
+                <img src="Mic.png" alt="Audio">
+                <div class="image-tag">Visual: Posisi Mic Optimal</div>
+            </div>
             <div class="text-info">
                 <h2>2. Audio (Kunci Utama)</h2>
                 <ul>
@@ -318,13 +340,13 @@
                             mesin atau angin kencang.</span></li>
                 </ul>
             </div>
-            <div class="visual-preview">
-                <img src="Mic.png" alt="Audio">
-                <div class="image-tag">Visual: Posisi Mic Optimal</div>
-            </div>
         </div>
 
         <div id="framing" class="tab-content">
+            <div class="visual-preview">
+                <img src="Framing.png" alt="Framing">
+                <div class="image-tag">Visual: Rule of Thirds</div>
+            </div>
             <div class="text-info">
                 <h2>3. Framing & Komposisi</h2>
                 <ul>
@@ -336,13 +358,13 @@
                             latar belakang/samping.</span></li>
                 </ul>
             </div>
-            <div class="visual-preview">
-                <img src="Framing.png" alt="Framing">
-                <div class="image-tag">Visual: Rule of Thirds</div>
-            </div>
         </div>
 
         <div id="script" class="tab-content">
+            <div class="visual-preview">
+                <img src="Gemini_Generated_Image_g11muug11muug11m.png" alt="Script">
+                <div class="image-tag">Visual: Alur Testimoni</div>
+            </div>
             <div class="text-info">
                 <h2>4. Teknik Script & Briefing</h2>
                 <ul>
@@ -353,10 +375,6 @@
                     <li><i class="fas fa-coins"></i> <span><strong>Data Riil:</strong> Minta penyebutan hasil panen atau
                             biaya riil untuk kredibilitas.</span></li>
                 </ul>
-            </div>
-            <div class="visual-preview">
-                <img src="Gemini_Generated_Image_g11muug11muug11m.png" alt="Script">
-                <div class="image-tag">Visual: Alur Testimoni</div>
             </div>
         </div>
         <br>
