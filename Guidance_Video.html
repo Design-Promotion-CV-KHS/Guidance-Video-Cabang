@@ -210,6 +210,40 @@
             transform: translateX(5px);
         }
 
+        /* Dropdown Styles */
+        .dropdown-trigger {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .dropdown-trigger i.chevron {
+            transition: transform 0.3s ease;
+            font-size: 0.8rem;
+            margin-top: 4px;
+        }
+
+        .submenu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+            padding-left: 1.5rem;
+            margin-top: 0.5rem;
+            border-left: 1px dashed var(--glass-border);
+        }
+
+        .submenu.active {
+            max-height: 1000px;
+            transition: max-height 1s ease-in-out;
+        }
+
+        .dropdown-trigger.active-trigger i.chevron {
+            transform: rotate(180deg);
+            color: var(--mineral-green);
+        }
+
         .step-card:nth-child(1) { border-top: 4px solid var(--mineral-green); animation-delay: 0.2s; }
         .step-card:nth-child(4) { border-top: 4px solid var(--primary-blue); animation-delay: 0.5s; }
 
@@ -269,24 +303,26 @@
             <ul class="link-list">
                 <li><a href="Panduan_Rekam_Wawancara.html" target="_self">
                     <span class="step-idx">6.</span> Panduan rekam video wawancara</a></li>
-                <li><a href="" target="_self">
-                    <span class="step-idx">7.</span> Panduan rekam video lahan</a></li>
-                <li><a href="Lahan_Kering.html" target="_self">
-                    <span class="step-idx">-</span> Lahan Kering</a></li>
-                <li><a href="Lahan_Basah.html" target="_self">
-                    <span class="step-idx">-</span> Lahan Basah</a></li>
-                <li><a href="Guludan_Lebar.html" target="_self">
-                    <span class="step-idx">-</span> Guludan Lebar</a></li>
-                <li><a href="Guludan_Sempit.html" target="_self">
-                    <span class="step-idx">-</span> Guludan Sempit</a></li>
-                <li><a href="Detail_Part.html" target="_self">
-                    <span class="step-idx">-</span> Detail Part</a></li>
-                <li><a href="Sebelum_Olah.html" target="_self">
-                    <span class="step-idx">-</span> Lahan Sebelum Diolah</a></li>
-                <li><a href="Saat_Olah.html" target="_self">
-                    <span class="step-idx">-</span> Lahan Saat Diolah</a></li>
-                <li><a href="Setelah_Olah.html" target="_self">
-                    <span class="step-idx">-</span> Lahan Setelah Diolah</a></li>
+                
+                <!-- Dropdown Point 7 -->
+                <li>
+                    <a class="dropdown-trigger" onclick="toggleDropdown(event)" target="_self">
+                        <span style="display: flex; gap: 12px;">
+                            <span class="step-idx">7.</span> Panduan rekam video lahan
+                        </span>
+                        <i class="fas fa-chevron-down chevron"></i>
+                    </a>
+                    <ul class="submenu link-list" id="submenu-7">
+                        <li><a href="Lahan_Kering.html" target="_self"><span class="step-idx">-</span> Lahan Kering</a></li>
+                        <li><a href="Lahan_Basah.html" target="_self"><span class="step-idx">-</span> Lahan Basah</a></li>
+                        <li><a href="Guludan_Lebar.html" target="_self"><span class="step-idx">-</span> Guludan Lebar</a></li>
+                        <li><a href="Guludan_Sempit.html" target="_self"><span class="step-idx">-</span> Guludan Sempit</a></li>
+                        <li><a href="Detail_Part.html" target="_self"><span class="step-idx">-</span> Detail Part</a></li>
+                        <li><a href="Sebelum_Olah.html" target="_self"><span class="step-idx">-</span> Lahan Sebelum Diolah</a></li>
+                        <li><a href="Saat_Olah.html" target="_self"><span class="step-idx">-</span> Lahan Saat Diolah</a></li>
+                        <li><a href="Setelah_Olah.html" target="_self"><span class="step-idx">-</span> Lahan Setelah Diolah</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
 
@@ -351,6 +387,16 @@
             dateElement.textContent = now.toLocaleDateString('id-ID', options);
         }
         updateDate();
+
+        function toggleDropdown(event) {
+            event.preventDefault();
+            const trigger = event.currentTarget;
+            const submenu = document.getElementById('submenu-7');
+            
+            // Toggle classes
+            submenu.classList.toggle('active');
+            trigger.classList.toggle('active-trigger');
+        }
     </script>
 
 </body>
