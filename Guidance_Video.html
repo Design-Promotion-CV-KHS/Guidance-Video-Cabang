@@ -22,16 +22,9 @@
             --text-muted: #94a3b8;
         }
 
-        /* --- Animasi Dasar --- */
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes fadeIn {
@@ -130,7 +123,7 @@
 
         .guidance-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 2rem;
             max-width: 1200px;
             margin: 0 auto;
@@ -178,6 +171,12 @@
             font-weight: 800;
             font-size: 1rem;
             flex-shrink: 0;
+            transition: all 0.5s ease;
+        }
+
+        .step-card:hover .step-number {
+            box-shadow: 0 0 20px var(--mineral-green);
+            transform: scale(1.1);
         }
 
         .step-card h2 {
@@ -206,36 +205,12 @@
             min-width: 20px;
         }
 
-        /* --- Styling Anak Poin (Dot Style) --- */
-        .sub-list {
-            margin-left: 2rem;
-            margin-top: 0.6rem;
-            list-style: none;
-        }
-
-        .sub-list li {
-            margin-bottom: 0.5rem;
-        }
-
-        .sub-list a {
-            font-size: 0.85rem !important;
-            color: #94a3b8;
-            align-items: center; /* Menyejajarkan dot dengan teks */
-        }
-
-        .sub-list a i {
-            font-size: 0.4rem; /* Ukuran dot kecil */
-            color: var(--mineral-green);
-            margin-top: 2px;
-        }
-
         .link-list a:hover {
             color: #fff;
             transform: translateX(5px);
         }
 
         .step-card:nth-child(1) { border-top: 4px solid var(--mineral-green); animation-delay: 0.2s; }
-        .step-card:nth-child(2) { border-top: 4px solid #facc15; animation-delay: 0.3s; }
         .step-card:nth-child(4) { border-top: 4px solid var(--primary-blue); animation-delay: 0.5s; }
 
         @media (max-width: 768px) {
@@ -273,19 +248,19 @@
             </div>
             <ul class="link-list">
                 <li><a href="https://docs.google.com/document/d/1TCPOzs3LN7j5LbUnmh4CNhfPp4yhDmAZ7B_Qu2JBWqI/edit?usp=sharing">
-                    <span class="step-idx">1.</span> Download form customer profile</a></li>
+                    <span class="step-idx">1.</span> Download form customer profile (Download file dan tuliskan data data customer sesuai form)</a></li>
                 <li><a href="https://gemini.google.com/share/73d68b4aa8c0">
-                    <span class="step-idx">2.</span> Olah script wawancara dengan Gemini AI</a></li>
+                    <span class="step-idx">2.</span> Merubah Form Customer profile (Sudah Terisi) menjadi script wawancara interaktif dengan gemini ai</a></li>
                 <li><a href="https://docs.google.com/document/d/1LGn4ekHsu0zO-SpzY_BJYWAFHJhbEHMX6Z9BjJcRudk/edit?usp=sharing">
-                    <span class="step-idx">3.</span> Download form persetujuan konsumen</a></li>
+                    <span class="step-idx">3.</span> Download form persetujuan konsumen (Wajib ditandatangani dan bermaterai oleh konsumen)</a></li>
                 <li><a href="https://docs.google.com/document/d/1EhtEGqR1B7xXNXOddNxmZd7FIAFXvifBpb1a-XB2Lw0/edit?usp=sharing">
-                    <span class="step-idx">4.</span> Ceklist peralatan video</a></li>
+                    <span class="step-idx">4.</span> Download ceklist peralatan yang diperlukan sebelum rekam video</a></li>
                 <li><a href="https://docs.google.com/document/d/1eYd3bIu3RlN4Oc1ilwHtHGD0nFHaKp3oFL6Vh-uae9A/edit?usp=sharing">
-                    <span class="step-idx">5.</span> Ceklist video wajib rekam</a></li>
+                    <span class="step-idx">5.</span> Ceklist video yang wajib direkam</a></li>
             </ul>
         </div>
 
-        <!-- Card B (Updated with Dots) -->
+        <!-- Card B -->
         <div class="step-card">
             <div class="step-header">
                 <div class="step-number">B</div>
@@ -294,22 +269,24 @@
             <ul class="link-list">
                 <li><a href="Panduan_Rekam_Wawancara.html" target="_self">
                     <span class="step-idx">6.</span> Panduan rekam video wawancara</a></li>
-                
-                <li>
-                    <a href="javascript:void(0)" style="cursor: default; pointer-events: none;">
-                        <span class="step-idx">7.</span> Panduan Rekam Video Lahan
-                    </a>
-                    <ul class="sub-list">
-                        <li><a href="Lahan_Kering.html" target="_self"><i class="fas fa-circle"></i> Lahan Kering</a></li>
-                        <li><a href="Lahan_Basah.html" target="_self"><i class="fas fa-circle"></i> Lahan Basah</a></li>
-                        <li><a href="Guludan_Lebar.html" target="_self"><i class="fas fa-circle"></i> Guludan Lebar</a></li>
-                        <li><a href="Guludan_Sempit.html" target="_self"><i class="fas fa-circle"></i> Guludan Sempit</a></li>
-                        <li><a href="Detail_Part.html" target="_self"><i class="fas fa-circle"></i> Detail Part Mesin</a></li>
-                        <li><a href="Sebelum_Olah.html" target="_self"><i class="fas fa-circle"></i> Tahap: Sebelum Diolah</a></li>
-                        <li><a href="Saat_Olah.html" target="_self"><i class="fas fa-circle"></i> Tahap: Saat Diolah</a></li>
-                        <li><a href="Setelah_Olah.html" target="_self"><i class="fas fa-circle"></i> Tahap: Setelah Diolah</a></li>
-                    </ul>
-                </li>
+                <li><a href="" target="_self">
+                    <span class="step-idx">7.</span> Panduan rekam video lahan</a></li>
+                <li><a href="Lahan_Kering.html" target="_self">
+                    <span class="step-idx">-</span> Lahan Kering</a></li>
+                <li><a href="Lahan_Basah.html" target="_self">
+                    <span class="step-idx">-</span> Lahan Basah</a></li>
+                <li><a href="Guludan_Lebar.html" target="_self">
+                    <span class="step-idx">-</span> Guludan Lebar</a></li>
+                <li><a href="Guludan_Sempit.html" target="_self">
+                    <span class="step-idx">-</span> Guludan Sempit</a></li>
+                <li><a href="Detail_Part.html" target="_self">
+                    <span class="step-idx">-</span> Detail Part</a></li>
+                <li><a href="Sebelum_Olah.html" target="_self">
+                    <span class="step-idx">-</span> Lahan Sebelum Diolah</a></li>
+                <li><a href="Saat_Olah.html" target="_self">
+                    <span class="step-idx">-</span> Lahan Saat Diolah</a></li>
+                <li><a href="Setelah_Olah.html" target="_self">
+                    <span class="step-idx">-</span> Lahan Setelah Diolah</a></li>
             </ul>
         </div>
 
@@ -321,9 +298,9 @@
             </div>
             <ul class="link-list">
                 <li><a href="https://youtu.be/1hG3oNzwTLA?si=zKDphyTSLD4Vw-me">
-                    <span class="step-idx">8.</span> Tutorial stabilisasi handphone</a></li>
+                    <span class="step-idx">8.</span> Panduan / video tutorial cara merekam video dengan menggunakan handphone supaya stabil.</a></li>
                 <li><a href="https://youtu.be/7fUi9sIu7rs?si=cBgta4xReNobOWEQ">
-                    <span class="step-idx">9.</span> Referensi angle video lahan</a></li>
+                    <span class="step-idx">9.</span> Panduan angle video - video yang bisa dijadikan sebagai referensi pada saat take video lahan</a></li>
             </ul>
         </div>
 
@@ -335,7 +312,7 @@
             </div>
             <ul class="link-list">
                 <li><a href="Penamaan_Folder.html" target="_self">
-                    <span class="step-idx">10.</span> Ketentuan penamaan & pengiriman</a></li>
+                    <span class="step-idx">10.</span> Ketentuan umum pengiriman dan penamaan folder resource video.</a></li>
             </ul>
         </div>
 
@@ -347,7 +324,7 @@
             </div>
             <ul class="link-list">
                 <li><a href="https://docs.google.com/spreadsheets/d/1hqbyAvXOeRzG1TFrJndSuophvUEr5QRUd0DvRmVTwvQ/edit?usp=sharing">
-                    <span class="step-idx">11.</span> Rekap Video Real-time 2026</a></li>
+                    <span class="step-idx">11.</span> Laporan rekap video tahun 2026 yang diupdate secara real-time setiap hari.</a></li>
             </ul>
         </div>
 
@@ -359,9 +336,9 @@
             </div>
             <ul class="link-list">
                 <li><a href="https://docs.google.com/spreadsheets/d/1wrKNz8fiZbWht82gEd0THJ-1chltvAZzxKbLLKYiYd8/edit?usp=sharing">
-                    <span class="step-idx">12.</span> Spreadsheet Evaluasi Cabang</a></li>
+                    <span class="step-idx">12.</span> Spreadsheet evaluasi dari hasil rekaman video dari cabang yang diupdate secara real-time.</a></li>
                 <li><a href="https://docs.google.com/spreadsheets/d/10bmeFhc9B7txKCxfJS3eObRDPEnRSQmYwUQvdyuU5zI/edit?usp=sharing">
-                    <span class="step-idx">13.</span> Report Bulanan 2026</a></li>
+                    <span class="step-idx">13.</span> Report bulanan kiriman video dari cabang periode Januari 2026 - Desember 2026</a></li>
             </ul>
         </div>
     </div>
