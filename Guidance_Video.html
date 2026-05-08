@@ -9,6 +9,8 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+    <base target="_blank">
+
     <style>
         :root {
             --primary-blue: #0059FF;
@@ -172,12 +174,18 @@
             transition: all 0.5s ease;
         }
 
+        .step-card:hover .step-number {
+            box-shadow: 0 0 20px var(--mineral-green);
+            transform: scale(1.1);
+        }
+
         .step-card h2 {
             font-size: 1.4rem;
             color: #fff;
         }
 
         .link-list { list-style: none; }
+
         .link-list li { margin-bottom: 1rem; }
 
         .link-list a {
@@ -191,18 +199,18 @@
             line-height: 1.4;
         }
 
-        .link-list a:hover {
-            color: #fff;
-            transform: translateX(5px);
-        }
-
         .step-idx {
             font-weight: 800;
             color: var(--mineral-green);
             min-width: 20px;
         }
 
-        /* Dropdown Logic Styles */
+        .link-list a:hover {
+            color: #fff;
+            transform: translateX(5px);
+        }
+
+        /* Dropdown Styles */
         .dropdown-trigger {
             cursor: pointer;
             display: flex;
@@ -220,16 +228,15 @@
         .submenu {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.4s ease-out;
+            transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
             padding-left: 1.5rem;
-            margin-top: 0;
+            margin-top: 0.5rem;
             border-left: 1px dashed var(--glass-border);
         }
 
         .submenu.active {
-            max-height: 500px; /* Nilai besar agar konten terlihat */
-            margin-top: 0.5rem;
-            transition: max-height 0.6s ease-in;
+            max-height: 1000px;
+            transition: max-height 1s ease-in-out;
         }
 
         .dropdown-trigger.active-trigger i.chevron {
@@ -238,7 +245,7 @@
         }
 
         .step-card:nth-child(1) { border-top: 4px solid var(--mineral-green); animation-delay: 0.2s; }
-        .step-card:nth-child(2) { border-top: 4px solid var(--primary-blue); animation-delay: 0.3s; }
+        .step-card:nth-child(4) { border-top: 4px solid var(--primary-blue); animation-delay: 0.5s; }
 
         @media (max-width: 768px) {
             h1 { font-size: 2rem; }
@@ -274,20 +281,20 @@
                 <h2>Persiapan Produksi</h2>
             </div>
             <ul class="link-list">
-                <li><a href="https://docs.google.com/document/d/1TCPOzs3LN7j5LbUnmh4CNhfPp4yhDmAZ7B_Qu2JBWqI/edit?usp=sharing" target="_blank">
-                    <span class="step-idx">1.</span> Download form customer profile</a></li>
-                <li><a href="https://gemini.google.com/share/73d68b4aa8c0" target="_blank">
-                    <span class="step-idx">2.</span> Merubah Form menjadi script wawancara</a></li>
-                <li><a href="https://docs.google.com/document/d/1LGn4ekHsu0zO-SpzY_BJYWAFHJhbEHMX6Z9BjJcRudk/edit?usp=sharing" target="_blank">
-                    <span class="step-idx">3.</span> Download form persetujuan konsumen</a></li>
-                <li><a href="https://docs.google.com/document/d/1EhtEGqR1B7xXNXOddNxmZd7FIAFXvifBpb1a-XB2Lw0/edit?usp=sharing" target="_blank">
-                    <span class="step-idx">4.</span> Ceklist peralatan rekam</a></li>
-                <li><a href="https://docs.google.com/document/d/1eYd3bIu3RlN4Oc1ilwHtHGD0nFHaKp3oFL6Vh-uae9A/edit?usp=sharing" target="_blank">
-                    <span class="step-idx">5.</span> Ceklist video wajib rekam</a></li>
+                <li><a href="https://docs.google.com/document/d/1TCPOzs3LN7j5LbUnmh4CNhfPp4yhDmAZ7B_Qu2JBWqI/edit?usp=sharing">
+                    <span class="step-idx">1.</span> Download form customer profile (Download file dan tuliskan data data customer sesuai form)</a></li>
+                <li><a href="https://gemini.google.com/share/73d68b4aa8c0">
+                    <span class="step-idx">2.</span> Merubah Form Customer profile (Sudah Terisi) menjadi script wawancara interaktif dengan gemini ai</a></li>
+                <li><a href="https://docs.google.com/document/d/1LGn4ekHsu0zO-SpzY_BJYWAFHJhbEHMX6Z9BjJcRudk/edit?usp=sharing">
+                    <span class="step-idx">3.</span> Download form persetujuan konsumen (Wajib ditandatangani dan bermaterai oleh konsumen)</a></li>
+                <li><a href="https://docs.google.com/document/d/1EhtEGqR1B7xXNXOddNxmZd7FIAFXvifBpb1a-XB2Lw0/edit?usp=sharing">
+                    <span class="step-idx">4.</span> Download ceklist peralatan yang diperlukan sebelum rekam video</a></li>
+                <li><a href="https://docs.google.com/document/d/1eYd3bIu3RlN4Oc1ilwHtHGD0nFHaKp3oFL6Vh-uae9A/edit?usp=sharing">
+                    <span class="step-idx">5.</span> Ceklist video yang wajib direkam</a></li>
             </ul>
         </div>
 
-
+        <!-- Card B -->
         <div class="step-card">
             <div class="step-header">
                 <div class="step-number">B</div>
@@ -297,14 +304,14 @@
                 <li><a href="Panduan_Rekam_Wawancara.html" target="_self">
                     <span class="step-idx">6.</span> Panduan rekam video wawancara</a></li>
                 
-
+                <!-- Dropdown Point 7 -->
                 <li>
-                    <div class="dropdown-trigger" onclick="toggleDropdown()">
+                    <a class="dropdown-trigger" onclick="toggleDropdown(event)" target="_self">
                         <span style="display: flex; gap: 12px;">
                             <span class="step-idx">7.</span> Panduan rekam video lahan
                         </span>
                         <i class="fas fa-chevron-down chevron"></i>
-                    </div>
+                    </a>
                     <ul class="submenu link-list" id="submenu-7">
                         <li><a href="Lahan_Kering.html" target="_self"><span class="step-idx">-</span> Lahan Kering</a></li>
                         <li><a href="Lahan_Basah.html" target="_self"><span class="step-idx">-</span> Lahan Basah</a></li>
@@ -319,11 +326,60 @@
             </ul>
         </div>
 
+        <!-- Card C -->
+        <div class="step-card">
+            <div class="step-header">
+                <div class="step-number">C</div>
+                <h2>Referensi Metode</h2>
+            </div>
+            <ul class="link-list">
+                <li><a href="https://youtu.be/1hG3oNzwTLA?si=zKDphyTSLD4Vw-me">
+                    <span class="step-idx">8.</span> Panduan / video tutorial cara merekam video dengan menggunakan handphone supaya stabil.</a></li>
+                <li><a href="https://youtu.be/7fUi9sIu7rs?si=cBgta4xReNobOWEQ">
+                    <span class="step-idx">9.</span> Panduan angle video - video yang bisa dijadikan sebagai referensi pada saat take video lahan</a></li>
+            </ul>
+        </div>
 
+        <!-- Card D -->
+        <div class="step-card">
+            <div class="step-header">
+                <div class="step-number">D</div>
+                <h2>Distribusi</h2>
+            </div>
+            <ul class="link-list">
+                <li><a href="Penamaan_Folder.html" target="_self">
+                    <span class="step-idx">10.</span> Ketentuan umum pengiriman dan penamaan folder resource video.</a></li>
+            </ul>
+        </div>
+
+        <!-- Card E -->
+        <div class="step-card">
+            <div class="step-header">
+                <div class="step-number">E</div>
+                <h2>Monitoring</h2>
+            </div>
+            <ul class="link-list">
+                <li><a href="https://docs.google.com/spreadsheets/d/1hqbyAvXOeRzG1TFrJndSuophvUEr5QRUd0DvRmVTwvQ/edit?usp=sharing">
+                    <span class="step-idx">11.</span> Laporan rekap video tahun 2026 yang diupdate secara real-time setiap hari.</a></li>
+            </ul>
+        </div>
+
+        <!-- Card F -->
+        <div class="step-card">
+            <div class="step-header">
+                <div class="step-number">F</div>
+                <h2>Evaluasi Konten</h2>
+            </div>
+            <ul class="link-list">
+                <li><a href="https://docs.google.com/spreadsheets/d/1wrKNz8fiZbWht82gEd0THJ-1chltvAZzxKbLLKYiYd8/edit?usp=sharing">
+                    <span class="step-idx">12.</span> Spreadsheet evaluasi dari hasil rekaman video dari cabang yang diupdate secara real-time.</a></li>
+                <li><a href="https://docs.google.com/spreadsheets/d/10bmeFhc9B7txKCxfJS3eObRDPEnRSQmYwUQvdyuU5zI/edit?usp=sharing">
+                    <span class="step-idx">13.</span> Report bulanan kiriman video dari cabang periode Januari 2026 - Desember 2026</a></li>
+            </ul>
+        </div>
     </div>
 
     <script>
-
         function updateDate() {
             const dateElement = document.getElementById('current-date');
             const now = new Date();
@@ -332,27 +388,17 @@
         }
         updateDate();
 
-        function toggleDropdown() {
-            const trigger = document.querySelector('.dropdown-trigger');
+        function toggleDropdown(event) {
+            event.preventDefault();
+            const trigger = event.currentTarget;
             const submenu = document.getElementById('submenu-7');
             
-            const isOpen = submenu.classList.toggle('active');
+            // Toggle classes
+            submenu.classList.toggle('active');
             trigger.classList.toggle('active-trigger');
-
-            localStorage.setItem('isLahanDropdownOpen', isOpen);
         }
-
-        window.addEventListener('DOMContentLoaded', () => {
-            const savedState = localStorage.getItem('isLahanDropdownOpen');
-            const trigger = document.querySelector('.dropdown-trigger');
-            const submenu = document.getElementById('submenu-7');
-
-            if (savedState === 'true') {
-                submenu.classList.add('active');
-                trigger.classList.add('active-trigger');
-            }
-        });
     </script>
 
 </body>
+
 </html>
