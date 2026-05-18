@@ -18,6 +18,7 @@
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: radial-gradient(circle at top right, #1e293b, #0f172a);
             display: flex; justify-content: center; align-items: center; z-index: 9999;
+            padding: 20px;
         }
         .login-card {
             background: var(--glass-white); border: 1px solid var(--glass-border);
@@ -38,9 +39,7 @@
         .login-card button:hover { opacity: 0.8; transform: translateY(-2px); }
         #error-msg { color: var(--target-red); font-size: 0.8rem; margin-top: 10px; display: none; }
 
-
         #main-content { display: none; }
-
 
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes growUp { from { transform: scaleY(0); } to { transform: scaleY(1); } }
@@ -76,7 +75,11 @@
 
         .double-chart-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
         .chart-box { background: rgba(15, 23, 42, 0.5); border: 1px solid var(--glass-border); padding: 2.5rem 1.5rem; border-radius: 24px; position: relative; }
-        .bar-chart-area { height: 220px; display: flex; align-items: flex-end; justify-content: space-between; position: relative; border-bottom: 2px solid var(--glass-border); padding: 0 10px; }
+        
+        /* Container Scroll untuk Chart di HP */
+        .chart-scroll-container { width: 100%; overflow-x: auto; }
+        .bar-chart-area { height: 220px; display: flex; align-items: flex-end; justify-content: space-between; position: relative; border-bottom: 2px solid var(--glass-border); padding: 0 10px; min-width: 500px; }
+        
         .line-target { position: absolute; left: 0; width: 100%; border-top: 2px dashed var(--target-red); z-index: 10; opacity: 0.6; }
         .tag-target { position: absolute; right: 0; top: -22px; color: var(--target-red); font-size: 0.7rem; font-weight: 800; background: #0f172a; padding: 2px 5px; }
         .bar-group { flex: 1; display: flex; flex-direction: column; align-items: center; z-index: 5; }
@@ -92,7 +95,20 @@
         .total-label { font-size: 0.75rem; color: var(--text-muted); font-weight: 600; }
         .total-value { font-size: 1.1rem; font-weight: 800; color: var(--mineral-green); }
 
-        @media (max-width: 1024px) { .double-chart-grid { grid-template-columns: 1fr; } }
+        /* --- MEDIA QUERIES UNTUK RESPONSIVITAS MOBILE --- */
+        @media (max-width: 1024px) { 
+            .double-chart-grid { grid-template-columns: 1fr; } 
+        }
+
+        @media (max-width: 768px) {
+            nav { padding: 1rem 5%; flex-direction: column; gap: 1rem; text-align: center; }
+            nav ul { gap: 1rem; flex-wrap: wrap; justify-content: center; }
+            .container { padding: 1rem 3%; }
+            .stats-grid { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; }
+            .stat-card { min-height: 150px; padding: 1rem; }
+            .stat-card .number { font-size: 2rem; }
+            .chart-box { padding: 1.5rem 1rem; }
+        }
     </style>
 </head>
 <body>
@@ -155,18 +171,23 @@
                 <div class="chart-box" id="monthly-chart-box">
                     <h3 id="realtime-chart-title" style="margin-bottom: 5px;">Kiriman Video</h3>
                     <p style="color: var(--text-muted); font-size: 0.8rem; margin-bottom: 40px;">Bulan Berjalan (Target: 2 Video)</p>
-                    <div class="bar-chart-area">
-                        <div class="line-target" style="bottom: 82px;"><span class="tag-target"><i class="fas fa-bullseye"></i> 2</span></div>
-                        <div class="bar-group"><span class="val-num">0</span><div class="bar-pill not-reached" style="height: 5px;"></div><span class="branch-label">JOGJA</span></div>
-                        <div class="bar-group"><span class="val-num">5</span><div class="bar-pill reached" style="height: 110px;"></div><span class="branch-label">NGANJUK</span></div>
-                        <div class="bar-group"><span class="val-num">0</span><div class="bar-pill not-reached" style="height: 5px;"></div><span class="branch-label">MKSR</span></div>
-                        <div class="bar-group"><span class="val-num">0</span><div class="bar-pill not-reached" style="height: 5px;"></div><span class="branch-label">MEDAN</span></div>
-                        <div class="bar-group"><span class="val-num">1</span><div class="bar-pill not-reached" style="height: 30px;"></div><span class="branch-label">PKBARU</span></div>
-                        <div class="bar-group"><span class="val-num">0</span><div class="bar-pill not-reached" style="height: 5px;"></div><span class="branch-label">LMPG</span></div>
-                        <div class="bar-group"><span class="val-num">0</span><div class="bar-pill not-reached" style="height: 5px;"></div><span class="branch-label">BJM</span></div>
-                        <div class="bar-group"><span class="val-num">0</span><div class="bar-pill not-reached" style="height: 5px;"></div><span class="branch-label">PALU</span></div>
-                        <div class="bar-group"><span class="val-num">2</span><div class="bar-pill reached" style="height: 60px;"></div><span class="branch-label">CIANJUR</span></div>
+                    
+                    <!-- Pembungkus Scroll HP -->
+                    <div class="chart-scroll-container">
+                        <div class="bar-chart-area">
+                            <div class="line-target" style="bottom: 82px;"><span class="tag-target"><i class="fas fa-bullseye"></i> 2</span></div>
+                            <div class="bar-group"><span class="val-num">0</span><div class="bar-pill not-reached" style="height: 5px;"></div><span class="branch-label">JOGJA</span></div>
+                            <div class="bar-group"><span class="val-num">5</span><div class="bar-pill reached" style="height: 110px;"></div><span class="branch-label">NGANJUK</span></div>
+                            <div class="bar-group"><span class="val-num">0</span><div class="bar-pill not-reached" style="height: 5px;"></div><span class="branch-label">MKSR</span></div>
+                            <div class="bar-group"><span class="val-num">0</span><div class="bar-pill not-reached" style="height: 5px;"></div><span class="branch-label">MEDAN</span></div>
+                            <div class="bar-group"><span class="val-num">1</span><div class="bar-pill not-reached" style="height: 30px;"></div><span class="branch-label">PKBARU</span></div>
+                            <div class="bar-group"><span class="val-num">0</span><div class="bar-pill not-reached" style="height: 5px;"></div><span class="branch-label">LMPG</span></div>
+                            <div class="bar-group"><span class="val-num">0</span><div class="bar-pill not-reached" style="height: 5px;"></div><span class="branch-label">BJM</span></div>
+                            <div class="bar-group"><span class="val-num">0</span><div class="bar-pill not-reached" style="height: 5px;"></div><span class="branch-label">PALU</span></div>
+                            <div class="bar-group"><span class="val-num">2</span><div class="bar-pill reached" style="height: 60px;"></div><span class="branch-label">CIANJUR</span></div>
+                        </div>
                     </div>
+
                     <div class="chart-footer">
                         <span class="total-label">TOTAL BULAN INI</span>
                         <span class="total-value" id="total-monthly-val">0</span>
@@ -176,18 +197,23 @@
                 <div class="chart-box" id="cumulative-chart-box">
                     <h3 style="margin-bottom: 5px;">Kumulatif Video Kiriman Cabang</h3>
                     <p style="color: var(--text-muted); font-size: 0.8rem; margin-bottom: 40px;">Januari - Mei (Target: 10 Video)</p>
-                    <div class="bar-chart-area">
-                        <div class="line-target" style="bottom: 121px;"><span class="tag-target"><i class="fas fa-bullseye"></i> 10</span></div>
-                        <div class="bar-group"><span class="val-num">10</span><div class="bar-pill reached" style="height: 100px;"></div><span class="branch-label">JOGJA</span></div>
-                        <div class="bar-group"><span class="val-num">30</span><div class="bar-pill reached" style="height: 220px;"></div><span class="branch-label">NGANJUK</span></div>
-                        <div class="bar-group"><span class="val-num">12</span><div class="bar-pill reached" style="height: 120px;"></div><span class="branch-label">MKSR</span></div>
-                        <div class="bar-group"><span class="val-num">8</span><div class="bar-pill not-reached" style="height: 80px;"></div><span class="branch-label">MEDAN</span></div>
-                        <div class="bar-group"><span class="val-num">9</span><div class="bar-pill not-reached" style="height: 90px;"></div><span class="branch-label">PKBARU</span></div>
-                        <div class="bar-group"><span class="val-num">8</span><div class="bar-pill not-reached" style="height: 80px;"></div><span class="branch-label">LMPG</span></div>
-                        <div class="bar-group"><span class="val-num">7</span><div class="bar-pill not-reached" style="height: 70px;"></div><span class="branch-label">BJM</span></div>
-                        <div class="bar-group"><span class="val-num">6</span><div class="bar-pill not-reached" style="height: 60px;"></div><span class="branch-label">PALU</span></div>
-                        <div class="bar-group"><span class="val-num">10</span><div class="bar-pill reached" style="height: 100px;"></div><span class="branch-label">CIANJUR</span></div>
+                    
+                    <!-- Pembungkus Scroll HP -->
+                    <div class="chart-scroll-container">
+                        <div class="bar-chart-area">
+                            <div class="line-target" style="bottom: 121px;"><span class="tag-target"><i class="fas fa-bullseye"></i> 10</span></div>
+                            <div class="bar-group"><span class="val-num">10</span><div class="bar-pill reached" style="height: 100px;"></div><span class="branch-label">JOGJA</span></div>
+                            <div class="bar-group"><span class="val-num">30</span><div class="bar-pill reached" style="height: 220px;"></div><span class="branch-label">NGANJUK</span></div>
+                            <div class="bar-group"><span class="val-num">12</span><div class="bar-pill reached" style="height: 120px;"></div><span class="branch-label">MKSR</span></div>
+                            <div class="bar-group"><span class="val-num">8</span><div class="bar-pill not-reached" style="height: 80px;"></div><span class="branch-label">MEDAN</span></div>
+                            <div class="bar-group"><span class="val-num">9</span><div class="bar-pill not-reached" style="height: 90px;"></div><span class="branch-label">PKBARU</span></div>
+                            <div class="bar-group"><span class="val-num">8</span><div class="bar-pill not-reached" style="height: 80px;"></div><span class="branch-label">LMPG</span></div>
+                            <div class="bar-group"><span class="val-num">7</span><div class="bar-pill not-reached" style="height: 70px;"></div><span class="branch-label">BJM</span></div>
+                            <div class="bar-group"><span class="val-num">6</span><div class="bar-pill not-reached" style="height: 60px;"></div><span class="branch-label">PALU</span></div>
+                            <div class="bar-group"><span class="val-num">10</span><div class="bar-pill reached" style="height: 100px;"></div><span class="branch-label">CIANJUR</span></div>
+                        </div>
                     </div>
+
                     <div class="chart-footer">
                         <span class="total-label">TOTAL KUMULATIF 2026</span>
                         <span class="total-value" id="total-cumulative-val">0</span>
@@ -225,13 +251,11 @@
             window.location.reload();
         }
 
-
         window.onload = function() {
             if (sessionStorage.getItem("isLoggedIn") === "true") {
                 showDashboard();
             }
         };
-
 
         function initDashboard() {
             const dateElement = document.getElementById('current-date');
