@@ -47,6 +47,7 @@
             padding: 40px 20px;
         }
 
+        /* Tombol Kembali - Responsif untuk HP */
         .back-btn {
             position: absolute;
             top: 30px;
@@ -61,6 +62,7 @@
             align-items: center;
             gap: 10px;
             transition: 0.3s;
+            z-index: 10;
         }
 
         .back-btn:hover {
@@ -70,6 +72,7 @@
 
         .header-title {
             text-align: center;
+            margin-top: 40px; /* Ruang aman untuk tombol kembali di mobile */
             margin-bottom: 40px;
             animation: fadeIn 0.6s ease-out;
         }
@@ -77,28 +80,43 @@
         .header-title h1 {
             font-size: 2.5rem;
             letter-spacing: -1px;
+            margin-bottom: 10px;
         }
 
         .header-title span {
             color: var(--primary-green);
         }
 
+        /* Grid Utama */
         .main-grid {
             display: grid;
-            grid-template-columns: 1.5fr 1fr;
+            grid-template-columns: 1.6fr 1fr;
             gap: 30px;
             max-width: 1300px;
             width: 100%;
             animation: fadeIn 0.8s ease-out;
         }
 
+        /* KOTAK UTAMA (Menyatukan Video & Panduan Visual) */
+        .video-visual-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            border: 1px solid var(--glass-border);
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Container Video di dalam kotak */
         .video-container {
             background: black;
-            border-radius: 30px;
+            border-radius: 20px;
             overflow: hidden;
-            border: 4px solid var(--glass-border);
             position: relative;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(255, 255, 255, 0.05);
         }
 
         video {
@@ -108,61 +126,29 @@
 
         .video-overlay-info {
             position: absolute;
-            bottom: 20px;
-            left: 20px;
-            background: rgba(0, 0, 0, 0.6);
+            bottom: 15px;
+            left: 15px;
+            background: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(10px);
-            padding: 10px 20px;
-            border-radius: 15px;
-            font-size: 0.85rem;
+            padding: 8px 16px;
+            border-radius: 12px;
+            font-size: 0.8rem;
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .details-panel {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
+        /* Bagian Catatan / Panduan di bawah video */
+        .angle-guide-section {
+            border-top: 1px solid var(--glass-border);
+            padding-top: 20px;
         }
 
-        .info-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(20px);
-            padding: 25px;
-            border-radius: 25px;
-            border: 1px solid var(--glass-border);
-        }
-
-        .info-card h3 {
+        .angle-guide-section h3 {
             color: var(--primary-green);
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             display: flex;
             align-items: center;
             gap: 10px;
-        }
-
-        .keterangan-list {
-            list-style: none;
-        }
-
-        .keterangan-list li {
-            margin-bottom: 12px;
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            color: #cbd5e1;
-            font-size: 0.95rem;
-        }
-
-        .keterangan-list li i {
-            color: var(--primary-green);
-            margin-top: 4px;
-        }
-
-        .angle-guide {
-            background: var(--card-bg);
-            border-radius: 25px;
-            padding: 25px;
-            border: 1px solid var(--glass-border);
+            font-size: 1.2rem;
         }
 
         .angle-img-container {
@@ -176,12 +162,116 @@
 
         .angle-img-container img {
             max-width: 100%;
+            height: auto;
             border-radius: 10px;
         }
 
-        @media (max-width: 1000px) {
+        /* Panel Keterangan Kiri/Kanan */
+        .details-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .info-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            padding: 25px;
+            border-radius: 30px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .info-card h3 {
+            color: var(--primary-green);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+        }
+
+        .keterangan-list {
+            list-style: none;
+        }
+
+        .keterangan-list li {
+            margin-bottom: 16px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            color: #cbd5e1;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .keterangan-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .keterangan-list li i {
+            color: var(--primary-green);
+            margin-top: 4px;
+            font-size: 1rem;
+        }
+
+        /* MEDIA QUERIES (RESPONSIF HP & TABLET) */
+        @media (max-width: 1024px) {
             .main-grid {
                 grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .header-title h1 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 20px 15px;
+            }
+
+            .back-btn {
+                position: static;
+                margin-bottom: 20px;
+                align-self: flex-start;
+                padding: 10px 16px;
+                font-size: 0.9rem;
+            }
+
+            .header-title {
+                margin-top: 0;
+                margin-bottom: 30px;
+                text-align: left;
+                width: 100%;
+            }
+
+            .header-title h1 {
+                font-size: 1.75rem;
+            }
+
+            .video-visual-card {
+                padding: 15px;
+                gap: 15px;
+                border-radius: 20px;
+            }
+
+            .info-card {
+                padding: 20px;
+                border-radius: 20px;
+            }
+
+            .video-overlay-info {
+                font-size: 0.75rem;
+                bottom: 10px;
+                left: 10px;
+                right: 10px;
+                text-align: center;
+            }
+
+            .angle-img-container {
+                padding: 8px;
+                margin-top: 10px;
             }
         }
     </style>
@@ -189,6 +279,7 @@
 
 <body>
 
+    <!-- Tombol Kembali yang fleksibel di HP -->
     <a href="Guidance_Video.html" class="back-btn">
         <i class="fas fa-arrow-left"></i> Kembali
     </a>
@@ -199,40 +290,44 @@
     </div>
 
     <div class="main-grid">
-        <div class="video-container">
-            <video controls poster="DPThumb.png">
-                <source src="DP.mp4" type="video/mp4">
-                Browser Anda tidak mendukung tag video.
-            </video>
-            <div class="video-overlay-info">
-                <i class="fas fa-info-circle"></i> Referensi: Sorotan Komponen Gearbox & Implement
-            </div>
-        </div>
 
-        <div class="details-panel">
-            <div class="angle-guide">
-                <h3><i class="fas fa-sticky-note"></i> Catatan</h3>
+        <!-- KOTAK SATU KESATUAN: VIDEO DAN PANDUAN VISUAL -->
+        <div class="video-visual-card">
+            <!-- Bagian Atas: Video -->
+            <div class="video-container">
+                <video controls poster="DPThumb.png">
+                    <source src="DP.mp4" type="video/mp4">
+                    Browser Anda tidak mendukung tag video.
+                </video>
+                <div class="video-overlay-info">
+                    <i class="fas fa-info-circle"></i> Referensi: Sorotan Komponen Gearbox & Implement
+                </div>
+            </div>
+
+            <!-- Bagian Bawah: Catatan Sudut Pandang -->
+            <div class="angle-guide-section">
+                <h3><i class="fas fa-sticky-note"></i> Catatan Panduan</h3>
                 <p style="font-size: 0.95rem; color: #cbd5e1; line-height: 1.5;">
-                    <i class="fas fa-camera" style="color: var(--primary-green); margin-right: 8px;"></i>
-                    Gunakan <strong>close up shoot</strong> untuk memperlihatkan detail dari part yang sedang bekerja.
+                    Gunakan <strong>close up shoot</strong> untuk memperlihatkan detail dari part yang sedang bekerja secara intim dan jelas.
                 </p>
                 <div class="angle-img-container">
                     <img src="SPDP.png" alt="Panduan Sudut Pandang Detail Part">
                 </div>
             </div>
+        </div>
 
+        <!-- KOLOM KETERANGAN -->
+        <div class="details-panel">
             <div class="info-card">
                 <h3><i class="fas fa-list-check"></i> Keterangan</h3>
                 <ul class="keterangan-list">
-                    <li><i class="fas fa-magnifying-glass"></i> <span>Merekam jelas secara dekat detail part yang akan
-                            divideokan.</span></li>
-                    <li><i class="fas fa-video"></i> <span>Jika ingin lebih stabil, gunakan tripod atau bisa video di
-                            tempat saja.</span></li>
-                    <li><i class="fas fa-shuffle"></i> <span>Biarkan traktor yang jalan dan kamera hape mengikuti
-                            gerakan traktor.</span></li>
+                    <li><i class="fas fa-magnifying-glass"></i> <span>Merekam jelas secara dekat detail part yang akan divideokan.</span></li>
+                    <li><i class="fas fa-video"></i> <span>Jika ingin lebih stabil, gunakan tripod atau bisa ambil video diam di tempat (*still shot*).</span></li>
+                    <li><i class="fas fa-shuffle"></i> <span>Biarkan traktor yang berjalan, kemudian kamera ponsel mengikuti pergerakan komponen secara halus.</span></li>
                 </ul>
             </div>
         </div>
+
     </div>
 
 </body>
