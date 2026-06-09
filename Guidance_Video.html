@@ -270,6 +270,14 @@
             animation: fadeIn 0.4s ease-out;
         }
 
+        .workspace-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            flex-shrink: 0;
+        }
+
         .btn-back {
             display: inline-flex;
             align-items: center;
@@ -282,15 +290,33 @@
             font-size: 13px;
             font-weight: 500;
             cursor: pointer;
-            margin-bottom: 1rem;
-            align-self: flex-start;
             transition: all 0.2s;
-            flex-shrink: 0;
         }
 
         .btn-back:hover {
-            background: rgba(255, 255, 255, 0.12);
-            border-color: rgba(255, 255, 255, 0.25);
+            background: rgba(239, 68, 68, 0.15);
+            border-color: rgba(239, 68, 68, 0.3);
+            color: #ef4444;
+        }
+
+        .btn-open-tab {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 89, 255, 0.15);
+            border: 1px solid rgba(0, 89, 255, 0.3);
+            color: #6699ff;
+            padding: 10px 20px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .btn-open-tab:hover {
+            background: var(--primary-blue);
+            color: #fff;
         }
 
         .workspace-frame-container {
@@ -345,15 +371,15 @@
                         <h2>Persiapan Prosedur</h2>
                     </div>
                     <ul class="link-list">
-                        <li><a class="embed-link" data-url="https://docs.google.com/document/d/1TCPOzs3LN7j5LbUnmh4CNhfPp4yhDmAZ7B_Qu2JBWqI/edit?rm=minimal">
+                        <li><a class="embed-link" data-url="https://docs.google.com/document/d/1TCPOzs3LN7j5LbUnmh4CNhfPp4yhDmAZ7B_Qu2JBWqI/edit">
                             <span class="step-idx">1.</span> Download form customer profile (Tuliskan data customer sesuai form)</a></li>
                         <li><a class="embed-link" data-url="https://gemini.google.com/share/73d68b4aa8c0">
                             <span class="step-idx">2.</span> Merubah Form Customer profile menjadi script wawancara interaktif dengan Gemini AI</a></li>
-                        <li><a class="embed-link" data-url="https://docs.google.com/document/d/1LGn4ekHsu0zO-SpzY_BJYWAFHJhbEHMX6Z9BjJcRudk/edit?rm=minimal">
+                        <li><a class="embed-link" data-url="https://docs.google.com/document/d/1LGn4ekHsu0zO-SpzY_BJYWAFHJhbEHMX6Z9BjJcRudk/edit">
                             <span class="step-idx">3.</span> Download form persetujuan konsumen (Wajib bermaterai)</a></li>
-                        <li><a class="embed-link" data-url="https://docs.google.com/document/d/1EhtEGqR1B7xXNXOddNxmZd7FIAFXvifBpb1a-XB2Lw0/edit?rm=minimal">
+                        <li><a class="embed-link" data-url="https://docs.google.com/document/d/1EhtEGqR1B7xXNXOddNxmZd7FIAFXvifBpb1a-XB2Lw0/edit">
                             <span class="step-idx">4.</span> Download ceklist peralatan yang diperlukan sebelum rekam video</a></li>
-                        <li><a class="embed-link" data-url="https://docs.google.com/document/d/1eYd3bIu3RlN4Oc1ilwHtHGD0nFHaKp3oFL6Vh-uae9A/edit?rm=minimal">
+                        <li><a class="embed-link" data-url="https://docs.google.com/document/d/1eYd3bIu3RlN4Oc1ilwHtHGD0nFHaKp3oFL6Vh-uae9A/edit">
                             <span class="step-idx">5.</span> Ceklist video yang wajib direkam</a></li>
                     </ul>
                 </div>
@@ -381,7 +407,7 @@
                                 <li><a class="embed-link" data-url="Detail_Part.html"><span class="step-idx">-</span> Detail Part</a></li>
                                 <li><a class="embed-link" data-url="Sebelum_Olah.html"><span class="step-idx">-</span> Lahan Sebelum Diolah</a></li>
                                 <li><a class="embed-link" data-url="Saat_Olah.html"><span class="step-idx">-</span> Lahan Saat Diolah</a></li>
-                                <li><a class="embed-link" data-url="Setelah_Olah.html"><span class="step-idx">-</span> Lahan Setelah Diolah</a></li>
+                                <li><a class="embed-link" data-url="After_Olah.html"><span class="step-idx">-</span> Lahan Setelah Diolah</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -417,7 +443,7 @@
                         <h2>Monitoring</h2>
                     </div>
                     <ul class="link-list">
-                        <li><a class="embed-link" data-url="https://docs.google.com/spreadsheets/d/1hqbyAvXOeRzG1TFrJndSuophvUEr5QRUd0DvRmVTwvQ/edit?rm=minimal">
+                        <li><a class="embed-link" data-url="https://docs.google.com/spreadsheets/d/1hqbyAvXOeRzG1TFrJndSuophvUEr5QRUd0DvRmVTwvQ/edit">
                             <span class="step-idx">11.</span> Laporan rekap video tahun 2026 yang diupdate secara real-time.</a></li>
                     </ul>
                 </div>
@@ -428,19 +454,25 @@
                         <h2>Evaluasi Konten</h2>
                     </div>
                     <ul class="link-list">
-                        <li><a class="embed-link" data-url="https://docs.google.com/spreadsheets/d/1wrKNz8fiZbWht82gEd0THJ-1chltvAZzxKbLLKYiYd8/edit?rm=minimal">
+                        <li><a class="embed-link" data-url="https://docs.google.com/spreadsheets/d/1wrKNz8fiZbWht82gEd0THJ-1chltvAZzxKbLLKYiYd8/edit">
                             <span class="step-idx">12.</span> Spreadsheet evaluasi rekaman video cabang terupdate.</a></li>
-                        <li><a class="embed-link" data-url="https://docs.google.com/spreadsheets/d/10bmeFhc9B7txKCxfJS3eObRDPEnRSQmYwUQvdyuU5zI/edit?rm=minimal">
+                        <li><a class="embed-link" data-url="https://docs.google.com/spreadsheets/d/10bmeFhc9B7txKCxfJS3eObRDPEnRSQmYwUQvdyuU5zI/edit">
                             <span class="step-idx">13.</span> Report bulanan kiriman video cabang periode 2026.</a></li>
                     </ul>
                 </div>
             </div>
         </div>
 
+        <!-- WORKSPACE VIEW -->
         <div class="system-workspace-view hidden" id="workspace-view">
-            <button class="btn-back" onclick="closeWorkspace()">
-                <i class="fas fa-arrow-left"></i> Kembali ke Panduan
-            </button>
+            <div class="workspace-controls">
+                <button class="btn-back" onclick="closeWorkspace()">
+                    <i class="fas fa-arrow-left"></i> Kembali ke Panduan
+                </button>
+                <a href="" target="_blank" class="btn-open-tab" id="workspace-external-btn">
+                    <i class="fas fa-external-link-alt"></i> Buka di Tab Baru
+                </a>
+            </div>
             <div class="workspace-frame-container">
                 <iframe src="" id="workspace-iframe" frameborder="0" allowfullscreen></iframe>
             </div>
@@ -468,6 +500,7 @@
         const mainGuidanceView = document.getElementById('main-guidance-view');
         const workspaceView = document.getElementById('workspace-view');
         const workspaceIframe = document.getElementById('workspace-iframe');
+        const workspaceExternalBtn = document.getElementById('workspace-external-btn');
         const embedLinks = document.querySelectorAll('.embed-link');
 
         embedLinks.forEach(link => {
@@ -475,7 +508,10 @@
                 e.preventDefault();
                 let targetUrl = this.getAttribute('data-url');
 
+                // Set URL iframe dan link tombol tab baru eksternal
                 workspaceIframe.src = targetUrl;
+                workspaceExternalBtn.href = targetUrl;
+                
                 mainNavbar.classList.add('hidden');
                 mainGuidanceView.classList.add('hidden');
                 workspaceView.classList.remove('hidden');
@@ -484,6 +520,7 @@
 
         function closeWorkspace() {
             workspaceIframe.src = "";
+            workspaceExternalBtn.href = "";
             workspaceView.classList.add('hidden');
             mainNavbar.classList.remove('hidden');
             mainGuidanceView.classList.remove('hidden');
