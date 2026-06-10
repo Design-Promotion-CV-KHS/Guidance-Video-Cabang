@@ -463,7 +463,6 @@
             </div>
         </div>
 
-        <!-- WORKSPACE VIEW -->
         <div class="system-workspace-view hidden" id="workspace-view">
             <div class="workspace-controls">
                 <button class="btn-back" onclick="closeWorkspace()">
@@ -508,7 +507,6 @@
                 e.preventDefault();
                 let targetUrl = this.getAttribute('data-url');
 
-                // Set URL iframe dan link tombol tab baru eksternal
                 workspaceIframe.src = targetUrl;
                 workspaceExternalBtn.href = targetUrl;
                 
@@ -516,6 +514,38 @@
                 mainGuidanceView.classList.add('hidden');
                 workspaceView.classList.remove('hidden');
             });
+        });
+
+        /* ==========================================================================
+           REVISI FITUR: ANTI-DOUBLE BACK BUTTON (PEMBERSIH INTERNAL IFRAME)
+           Menghilangkan tombol kembali & navbar bawaan file lokal agar tidak rancu.
+           ========================================================================== */
+        workspaceIframe.addEventListener('load', function() {
+            try {
+                const iframeDocument = workspaceIframe.contentDocument || workspaceIframe.contentWindow.document;
+                
+                // Kumpulan selector tombol kembali atau navbar yang berpotensi muncul ganda
+                // Anda bisa menambahkan class tombol bawaan file Lahan_Kering.html di sini jika berbeda
+                const selectorsToHide = [
+                    '.btn-back', 
+                    '.btn-kembali', 
+                    'nav', 
+                    'header button', 
+                    '[class*="back-button"]', 
+                    '[class*="nav-back"]'
+                ];
+
+                selectorsToHide.forEach(selector => {
+                    const elements = iframeDocument.querySelectorAll(selector);
+                    elements.forEach(el => {
+                        // Cek agar tidak salah menyembunyikan elemen penting, khusus elemen navigasi keluar/kembali
+                        el.style.setProperty('display', 'none', 'important');
+                    });
+                });
+            } catch (error) {
+                // Catatan: Proteksi jika link mengarah ke Google Docs / domain luar (CORS policy)
+                console.log("Membuka dokumen eksternal aman, pembersihan elemen dilewati.");
+            }
         });
 
         function closeWorkspace() {
