@@ -299,26 +299,6 @@
             color: #ef4444;
         }
 
-        .btn-open-tab {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(0, 89, 255, 0.15);
-            border: 1px solid rgba(0, 89, 255, 0.3);
-            color: #6699ff;
-            padding: 10px 20px;
-            border-radius: 12px;
-            font-size: 13px;
-            font-weight: 500;
-            text-decoration: none;
-            transition: all 0.2s;
-        }
-
-        .btn-open-tab:hover {
-            background: var(--primary-blue);
-            color: #fff;
-        }
-
         .workspace-frame-container {
             width: 100%;
             flex: 1;
@@ -468,9 +448,6 @@
                 <button class="btn-back" onclick="closeWorkspace()">
                     <i class="fas fa-arrow-left"></i> Kembali ke Panduan
                 </button>
-                <a href="" target="_blank" class="btn-open-tab" id="workspace-external-btn">
-                    <i class="fas fa-external-link-alt"></i> Buka di Tab Baru
-                </a>
             </div>
             <div class="workspace-frame-container">
                 <iframe src="" id="workspace-iframe" frameborder="0" allowfullscreen></iframe>
@@ -499,7 +476,6 @@
         const mainGuidanceView = document.getElementById('main-guidance-view');
         const workspaceView = document.getElementById('workspace-view');
         const workspaceIframe = document.getElementById('workspace-iframe');
-        const workspaceExternalBtn = document.getElementById('workspace-external-btn');
         const embedLinks = document.querySelectorAll('.embed-link');
         const btnBackSystem = document.querySelector('.btn-back');
 
@@ -509,7 +485,6 @@
                 let targetUrl = this.getAttribute('data-url');
 
                 workspaceIframe.src = targetUrl;
-                workspaceExternalBtn.href = targetUrl;
                 
                 mainNavbar.classList.add('hidden');
                 mainGuidanceView.classList.add('hidden');
@@ -525,7 +500,6 @@
 
         function closeWorkspace() {
             workspaceIframe.src = "";
-            workspaceExternalBtn.href = "";
             workspaceView.classList.add('hidden');
             mainNavbar.classList.remove('hidden');
             mainGuidanceView.classList.remove('hidden');
