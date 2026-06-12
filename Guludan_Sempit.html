@@ -139,19 +139,13 @@
             font-size: 1.2rem;
         }
 
-        .angle-img-container {
-            background: white;
+        /* Container Video Sudut Pandang Baru */
+        .angle-video-container {
+            background: black;
             border-radius: 15px;
-            padding: 15px;
+            overflow: hidden;
             margin-top: 15px;
-            display: flex;
-            justify-content: center;
-        }
-
-        .angle-img-container img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 10px;
+            border: 2px solid rgba(255, 255, 255, 0.05);
         }
 
         /* Panel Keterangan Kiri/Kanan */
@@ -249,8 +243,7 @@
                 border-radius: 20px;
             }
 
-            .angle-img-container {
-                padding: 8px;
+            .angle-video-container {
                 margin-top: 10px;
             }
         }
@@ -272,7 +265,7 @@
 
         <div class="video-visual-card">
             <div class="video-container">
-                <video controls poster="GSTHUMB.png">
+                <video autoplay muted loop playsinline poster="GSTHUMB.png">
                     <source src="GS.mp4" type="video/mp4">
                     Browser Anda tidak mendukung tag video.
                 </video>
@@ -281,8 +274,11 @@
             <div class="angle-guide-section">
                 <h3><i class="fas fa-camera"></i> Panduan Sudut Pandang</h3>
                 <p style="font-size: 0.85rem; color: #94a3b8;">Posisi kamera tinggi untuk memperlihatkan jalur guludan yang rapat.</p>
-                <div class="angle-img-container">
-                    <img src="SPGS.png" alt="Panduan Sudut Pandang Guludan Sempit">
+                <div class="angle-video-container">
+                    <video autoplay muted loop playsinline>
+                        <source src="AngleGS.mp4" type="video/mp4">
+                        Browser Anda tidak mendukung tag video.
+                    </video>
                 </div>
             </div>
         </div>
