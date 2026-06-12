@@ -134,6 +134,7 @@
             border-radius: 12px;
             font-size: 0.8rem;
             border: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 2;
         }
 
         /* Bagian Catatan / Panduan di bawah video */
@@ -151,19 +152,13 @@
             font-size: 1.2rem;
         }
 
-        .angle-img-container {
-            background: white;
+        /* Container Video Sudut Pandang Baru */
+        .angle-video-container {
+            background: black;
             border-radius: 15px;
-            padding: 15px;
+            overflow: hidden;
             margin-top: 15px;
-            display: flex;
-            justify-content: center;
-        }
-
-        .angle-img-container img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 10px;
+            border: 2px solid rgba(255, 255, 255, 0.05);
         }
 
         /* Panel Keterangan Kiri/Kanan */
@@ -269,8 +264,7 @@
                 text-align: center;
             }
 
-            .angle-img-container {
-                padding: 8px;
+            .angle-video-container {
                 margin-top: 10px;
             }
         }
@@ -279,7 +273,6 @@
 
 <body>
 
-    <!-- Tombol Kembali yang fleksibel di HP -->
     <a href="Guidance_Video.html" class="back-btn">
         <i class="fas fa-arrow-left"></i> Kembali
     </a>
@@ -291,11 +284,9 @@
 
     <div class="main-grid">
 
-        <!-- KOTAK SATU KESATUAN: VIDEO DAN PANDUAN VISUAL -->
         <div class="video-visual-card">
-            <!-- Bagian Atas: Video -->
             <div class="video-container">
-                <video controls poster="DPThumb.png">
+                <video autoplay muted loop playsinline poster="DPThumb.png">
                     <source src="DP.mp4" type="video/mp4">
                     Browser Anda tidak mendukung tag video.
                 </video>
@@ -304,19 +295,20 @@
                 </div>
             </div>
 
-            <!-- Bagian Bawah: Catatan Sudut Pandang -->
             <div class="angle-guide-section">
                 <h3><i class="fas fa-sticky-note"></i> Catatan Panduan</h3>
                 <p style="font-size: 0.95rem; color: #cbd5e1; line-height: 1.5;">
                     Gunakan <strong>close up shoot</strong> untuk memperlihatkan detail dari part yang sedang bekerja secara intim dan jelas.
                 </p>
-                <div class="angle-img-container">
-                    <img src="SPDP.png" alt="Panduan Sudut Pandang Detail Part">
+                <div class="angle-video-container">
+                    <video autoplay muted loop playsinline>
+                        <source src="AngleDP.mp4" type="video/mp4">
+                        Browser Anda tidak mendukung tag video.
+                    </video>
                 </div>
             </div>
         </div>
 
-        <!-- KOLOM KETERANGAN -->
         <div class="details-panel">
             <div class="info-card">
                 <h3><i class="fas fa-list-check"></i> Keterangan</h3>
