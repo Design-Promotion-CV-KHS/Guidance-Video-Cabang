@@ -226,6 +226,46 @@
             transform: translateX(5px);
         }
 
+        /* STYLING TAMBAHAN UNTUK HIGHLIGHT LANGKAH NOMOR 2 */
+        .highlight-glow-container {
+            margin: 1.2rem 0 !important;
+        }
+
+        .highlight-glow-link {
+            background: rgba(65, 179, 163, 0.07) !important;
+            border: 1px solid rgba(65, 179, 163, 0.25) !important;
+            padding: 12px 14px !important;
+            border-radius: 14px !important;
+            box-shadow: 0 0 15px rgba(65, 179, 163, 0.05);
+            transition: all 0.4s ease !important;
+        }
+
+        .highlight-glow-link .step-text {
+            color: #ffffff !important;
+            font-weight: 700 !important;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+
+        .highlight-glow-link:hover {
+            background: rgba(65, 179, 163, 0.15) !important;
+            border-color: rgba(65, 179, 163, 0.5) !important;
+            box-shadow: 0 0 20px rgba(65, 179, 163, 0.25) !important;
+            transform: translateX(8px) !important;
+        }
+
+        .highlight-glow-link i.fa-external-link-alt {
+            color: var(--mineral-green);
+            font-size: 0.8rem;
+            margin-top: 3px;
+            transition: transform 0.3s ease;
+        }
+
+        .highlight-glow-link:hover i.fa-external-link-alt {
+            transform: translate(2px, -2px);
+            color: #fff;
+        }
+        /* ------------------------------------------------- */
+
         .dropdown-trigger {
             display: flex;
             justify-content: space-between;
@@ -353,8 +393,15 @@
                     <ul class="link-list">
                         <li><a class="embed-link" data-url="https://docs.google.com/document/d/1TCPOzs3LN7j5LbUnmh4CNhfPp4yhDmAZ7B_Qu2JBWqI/edit">
                             <span class="step-idx">1.</span> Download form customer profile (Tuliskan data customer sesuai form)</a></li>
-                        <li><a href="https://gemini.google.com/share/83bc7287500a" target="_blank">
-                            <span class="step-idx">2.</span> <strong>Membuat Skenario Berdasarkan Form Customer Profile Dengan Gemini AI</strong></a></li>
+                        
+                        <li class="highlight-glow-container">
+                            <a href="https://gemini.google.com/share/83bc7287500a" target="_blank" class="highlight-glow-link">
+                                <span class="step-idx">2.</span> 
+                                <span class="step-text">Membuat Skenario Berdasarkan Form Customer Profile Dengan Gemini AI</span>
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </li>
+                        
                         <li><a class="embed-link" data-url="https://docs.google.com/document/d/1LGn4ekHsu0zO-SpzY_BJYWAFHJhbEHMX6Z9BjJcRudk/edit">
                             <span class="step-idx">3.</span> Download form persetujuan konsumen (Wajib bermaterai)</a></li>
                         <li><a class="embed-link" data-url="https://docs.google.com/document/d/1EhtEGqR1B7xXNXOddNxmZd7FIAFXvifBpb1a-XB2Lw0/edit">
