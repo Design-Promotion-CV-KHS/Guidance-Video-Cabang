@@ -166,6 +166,32 @@
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
         }
 
+        /* STYLING KHUSUS CARD CONTRAST (PLANNING VIDEO) - FULL SPAN & COMPACT HEIGHT */
+        .step-card.contrast-card {
+            grid-column: 1 / -1; /* Membuat card melebar selebar grid penuh (2 kolom ke bawah) */
+            padding: 1.5rem 2.5rem; /* Tinggi dibuat lebih ringkas */
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.12), rgba(220, 38, 38, 0.08));
+            border: 2px solid rgba(245, 158, 11, 0.4);
+            border-top: 4px solid #f59e0b;
+            box-shadow: 0 10px 30px rgba(245, 158, 11, 0.1);
+            animation-delay: 0.1s;
+        }
+
+        .step-card.contrast-card:hover {
+            border-color: rgba(245, 158, 11, 0.8);
+            box-shadow: 0 15px 35px rgba(245, 158, 11, 0.25);
+            transform: translateY(-5px);
+        }
+
+        .contrast-card .step-header {
+            margin-bottom: 0.8rem;
+            padding-bottom: 0.6rem;
+        }
+
+        .contrast-card .link-list li {
+            margin-bottom: 0;
+        }
+
         .step-header {
             display: flex;
             align-items: center;
@@ -195,9 +221,25 @@
             transform: scale(1.1);
         }
 
+        .step-card.contrast-card .step-number {
+            background: #f59e0b;
+            color: #fff;
+            width: 30px;
+            height: 30px;
+            font-size: 0.9rem;
+        }
+
+        .step-card.contrast-card:hover .step-number {
+            box-shadow: 0 0 20px #f59e0b;
+        }
+
         .step-card h2 {
             font-size: 1.4rem;
             color: #fff;
+        }
+
+        .step-card.contrast-card h2 {
+            font-size: 1.2rem;
         }
 
         .link-list { list-style: none; }
@@ -219,6 +261,10 @@
             font-weight: 800;
             color: var(--mineral-green);
             min-width: 20px;
+        }
+
+        .contrast-card .step-idx {
+            color: #f59e0b;
         }
 
         .link-list a:hover {
@@ -298,8 +344,8 @@
             color: var(--mineral-green);
         }
 
-        .step-card:nth-child(1) { border-top: 4px solid var(--mineral-green); animation-delay: 0.2s; }
-        .step-card:nth-child(4) { border-top: 4px solid var(--primary-blue); animation-delay: 0.5s; }
+        .step-card:nth-child(2) { border-top: 4px solid var(--mineral-green); animation-delay: 0.2s; }
+        .step-card:nth-child(6) { border-top: 4px solid var(--primary-blue); animation-delay: 0.5s; }
 
         .system-workspace-view {
             flex: 1;
@@ -359,6 +405,7 @@
         @media (max-width: 768px) {
             h1 { font-size: 2rem; }
             .guidance-grid { grid-template-columns: 1fr; }
+            .step-card.contrast-card { grid-column: auto; }
             nav ul, #current-date { display: none; }
         }
     </style>
@@ -385,6 +432,22 @@
             </header>
 
             <div class="guidance-grid">
+                <!-- CARD BARU: PLANNING VIDEO (MELEBAR PENUH & LEBIH RINGKAS) -->
+                <div class="step-card contrast-card">
+                    <div class="step-header">
+                        <div class="step-number"><i class="fas fa-exclamation"></i></div>
+                        <h2>Planning Video (Wajib Diisi)</h2>
+                    </div>
+                    <ul class="link-list">
+                        <li>
+                            <a class="embed-link" data-url="https://docs.google.com/spreadsheets/d/1OTXYRf4NQ-AJnRgA0gCDAlZqSWrQJ7_3RntxwSStMiU/edit?usp=sharing">
+                                <span class="step-idx">!</span> 
+                                <span>Buka dan isi spreadsheet planning video yang telah disediakan untuk merencanakan konten anda.</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
                 <div class="step-card">
                     <div class="step-header">
                         <div class="step-number">A</div>
